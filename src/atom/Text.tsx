@@ -16,7 +16,6 @@ interface TypographyProps extends HTMLAttributes<Element> {
   fontStyle?: "Large" | "Medium" | "Small" | "ExtraSmall";
   fontColor?: fontColor;
   style?: React.CSSProperties;
-  children?: any;
 }
 const getTypoStyleProps = (props: {
   webSize?: number;
@@ -37,7 +36,6 @@ export const Display = ({
   weight = 600,
   fontStyle = "Medium",
   fontColor,
-  children: value,
   ...props
 }: TypographyProps) => {
   const fontSizes: object =
@@ -49,7 +47,7 @@ export const Display = ({
   `;
   return (
     <StyledDisplay className="display" {...props}>
-      {value}
+      {props.children}
     </StyledDisplay>
   );
 };
@@ -57,7 +55,6 @@ export const Heading = ({
   weight = 600,
   fontStyle = "Large",
   fontColor,
-  children: value,
   ...props
 }: TypographyProps) => {
   const fontSizes: object =
@@ -67,11 +64,11 @@ export const Heading = ({
   const StyledHeading = (fontStyle === "Large"
     ? styled.h1
     : fontStyle === "Medium"
-      ? styled.h2
-      : styled.h3)`${getTypoStyleProps({ ...fontSizes, weight, fontColor })}`;
+    ? styled.h2
+    : styled.h3)`${getTypoStyleProps({ ...fontSizes, weight, fontColor })}`;
   return (
     <StyledHeading className="heading" {...props}>
-      {value}
+      {props.children}
     </StyledHeading>
   );
 };
@@ -79,7 +76,6 @@ export const Title = ({
   weight = 600,
   fontStyle = "Medium",
   fontColor,
-  children: value,
   ...props
 }: TypographyProps) => {
   const fontSizes: object =
@@ -89,11 +85,11 @@ export const Title = ({
   const StyledTitle = (fontStyle === "Medium"
     ? styled.h5
     : fontStyle === "Large"
-      ? styled.h4
-      : styled.h6)`${getTypoStyleProps({ ...fontSizes, weight, fontColor })}`;
+    ? styled.h4
+    : styled.h6)`${getTypoStyleProps({ ...fontSizes, weight, fontColor })}`;
   return (
     <StyledTitle className="title" {...props}>
-      {value}
+      {props.children}
     </StyledTitle>
   );
 };
@@ -101,7 +97,6 @@ export const Body = ({
   weight = 400,
   fontStyle = "Small",
   fontColor,
-  children,
   ...props
 }: TypographyProps) => {
   const fontSizes: object =
@@ -113,7 +108,7 @@ export const Body = ({
   `;
   return (
     <StyledBody className={`body ${weight}`} {...props}>
-      {children}
+      {props.children}
     </StyledBody>
   );
 };
@@ -123,13 +118,11 @@ interface LableProps extends LabelHTMLAttributes<HTMLLabelElement> {
   fontStyle?: "Large" | "Medium" | "Small" | "ExtraSmall";
   fontColor?: fontColor;
   style?: React.CSSProperties;
-  children?: any;
 }
 export const Lable = ({
   weight = 600,
   fontStyle = "Medium",
   fontColor,
-  children: value,
   required = false,
   ...props
 }: LableProps) => {
@@ -147,7 +140,7 @@ export const Lable = ({
   `;
   return (
     <StyledLable className={required ? "essential" : ""} {...props}>
-      {value}
+      {props.children}
     </StyledLable>
   );
 };
@@ -173,7 +166,6 @@ interface TextProps {
    */
   fontColor?: fontColor;
   style?: React.CSSProperties;
-  children?: any;
 }
 export const Text = ({ usage = "body", ...props }: TextProps) => {
   switch (usage) {

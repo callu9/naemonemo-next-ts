@@ -1,9 +1,9 @@
 import { ButtonHTMLAttributes } from "react";
 import styled from "styled-components";
-import { Icon } from "../atom/Icon";
-import { Body } from "../atom/Text";
-import { token } from "../foundation/color";
-import { layout } from "../foundation/layout";
+import { Icon } from "../../atom/Icon";
+import { Body } from "../../atom/Text";
+import { token } from "../../foundation/color";
+import { layout } from "../../foundation/layout";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -45,7 +45,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export function Button({
   text,
   size = "Small",
-  radius = 4,
+  radius = 0,
   disabled = false,
   property = "outlined",
   icon,

@@ -29,6 +29,10 @@ interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
    */
   radius?: number;
   /**
+   * 컨테이너의 padding 값을 지정합니다.
+   */
+  padding?: number | string;
+  /**
    * 컨테이너의 배경색을 지정합니다.
    */
   bgColor?:
@@ -48,7 +52,6 @@ interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
    * 기타 스타일을 지정하고 싶을 때 사용합니다. (ex. padding, margin...)
    */
   style?: React.CSSProperties;
-  children?: any;
 }
 /**
  * 배경색 및 테두리 색상을 쉽게 지정하고, 자식 요소간 정렬을 돕습니다.
@@ -60,6 +63,7 @@ export const Container = ({
   align = "center",
   spacing = 16,
   radius,
+  padding,
   bgColor,
   borderColor,
   ...props
@@ -71,6 +75,7 @@ export const Container = ({
     background-color: ${bgColor ? token.surface[bgColor]?.hex : "transparent"};
     ${borderColor ? `border: 1px solid ${token.border[borderColor]?.hex}` : ""};
     border-radius: ${radius || 0}px;
+    padding: ${padding || 0};
     font-family: "Pretendard300";
   `;
   return (

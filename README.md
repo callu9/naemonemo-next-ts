@@ -1,4 +1,4 @@
-# naemonemo-react-ts 🟫
+# naemonemo-next-ts 🟫
 
 내모네모 (내 모든 네모 속 세상) 쇼핑몰 웹앱 프로젝트입니다.
 
@@ -7,7 +7,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Goals 💡
 
-- Atomic Design Pattern React App 구현<br />
+- Atomic Design Pattern 적용<br />
   (Foundation -> Atomic -> Component -> Template -> Page)
 - styled-components 적용
 

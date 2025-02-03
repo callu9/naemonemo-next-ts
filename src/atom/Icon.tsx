@@ -1,21 +1,21 @@
 import styled from "styled-components";
-import { ReactComponent as IconAdd } from "../assets/icon/add.svg";
-import { ReactComponent as IconConfirm } from "../assets/icon/check_circle.svg";
-import { ReactComponent as Unchecked } from "../assets/icon/check_false.svg";
-import { ReactComponent as UncheckedSquare } from "../assets/icon/check_square_false.svg";
-import { ReactComponent as CheckedSquare } from "../assets/icon/check_square_true.svg";
-import { ReactComponent as Checked } from "../assets/icon/check_true.svg";
-import { ReactComponent as IconChevron } from "../assets/icon/chevron.svg";
-import { ReactComponent as IconClose } from "../assets/icon/close.svg";
-import { ReactComponent as IconDownload } from "../assets/icon/download.svg";
-import { ReactComponent as IconNoti } from "../assets/icon/notifications.svg";
-import { ReactComponent as RadioActive } from "../assets/icon/radio.svg";
-import { ReactComponent as IconRefresh } from "../assets/icon/refresh.svg";
-import { ReactComponent as IconRemove } from "../assets/icon/remove.svg";
-import { ReactComponent as IconSearch } from "../assets/icon/search.svg";
-import { ReactComponent as IconUpload } from "../assets/icon/upload.svg";
-import { ReactComponent as IconVisible } from "../assets/icon/visibility.svg";
-import { ReactComponent as IconInvisible } from "../assets/icon/visibility_off.svg";
+import IconAdd from "../assets/icon/add.svg";
+import IconConfirm from "../assets/icon/check_circle.svg";
+import Unchecked from "../assets/icon/check_false.svg";
+import UncheckedSquare from "../assets/icon/check_square_false.svg";
+import CheckedSquare from "../assets/icon/check_square_true.svg";
+import Checked from "../assets/icon/check_true.svg";
+import IconChevron from "../assets/icon/chevron.svg";
+import IconClose from "../assets/icon/close.svg";
+import IconDownload from "../assets/icon/download.svg";
+import IconNoti from "../assets/icon/notifications.svg";
+import RadioActive from "../assets/icon/radio.svg";
+import IconRefresh from "../assets/icon/refresh.svg";
+import IconRemove from "../assets/icon/remove.svg";
+import IconSearch from "../assets/icon/search.svg";
+import IconUpload from "../assets/icon/upload.svg";
+import IconVisible from "../assets/icon/visibility.svg";
+import IconInvisible from "../assets/icon/visibility_off.svg";
 import { token } from "../foundation/color";
 
 /**
@@ -82,7 +82,7 @@ export const Icon = ({
   ...props
 }: IconProps) => {
   const IconProps = Object(IconObj)[iconNm];
-  const StyledIcon = styled(IconProps.component || IconConfirm)`
+  const StyledIcon = styled(IconProps.component)`
     transform: rotate(${IconProps.rotate || 0}deg);
     width: ${iconSize}px;
     height: ${iconSize}px;

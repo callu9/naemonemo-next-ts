@@ -92,58 +92,48 @@ const surface = {
     palette: "gray",
     depth: 0,
     hex: gray[0],
-    description: "기본 표면 색상입니다.",
   },
   secondary: {
     styleNm: "Secondary",
     palette: "gray",
     depth: 100,
     hex: gray[100],
-    description:
-      "기본 배경 색상에서 특정 레이어를 분리해야 할 때 사용합니다.\n또는 하나의 레이어에서 정보 그룹 Container로 사용할 수 있습니다.",
   },
   tertiary: {
     styleNm: "Tertiary",
     palette: "gray",
     depth: 200,
     hex: gray[200],
-    description:
-      "기본 배경 색상에서 특정 레이어를 분리해야 할 때 사용합니다.\nBg_light보다 더 강하게 구분이 필요할 때 사용합니다.",
   },
   invert: {
     styleNm: "Invert",
     palette: "gray",
     depth: 900,
     hex: gray[900],
-    description: "반전 배경 색상입니다.",
   },
   brand: {
     styleNm: "Brand",
     palette: "red",
     depth: 500,
     hex: red[500],
-    description: "강조 배경 색상입니다.",
   },
   negative: {
     styleNm: "Negative",
     palette: "red",
     depth: 50,
     hex: red[50],
-    description: "부정의 배경 색상입니다.",
   },
   positive: {
     styleNm: "Positive",
     palette: "blue",
     depth: 50,
     hex: blue[50],
-    description: "긍정의 배경 색상입니다.",
   },
   info: {
     styleNm: "Info",
     palette: "navy",
     depth: 50,
     hex: navy[50],
-    description: "인포메이션 및 가이드 배경 색상입니다.",
   },
 };
 const text = {
@@ -152,51 +142,42 @@ const text = {
     palette: "gray",
     depth: 900,
     hex: gray[900],
-    description: "기본 텍스트 색상입니다. 콘텐츠에 대해 읽기 쉬운 대비를 제공합니다",
   },
   secondary: {
     styleNm: "Secondary",
     palette: "gray",
     depth: 700,
     hex: gray[700],
-    description:
-      "두번째 위계의 텍스트 색상입니다. 상대적으로 덜 중요한 정보에 사용합니다.\n또는 정보량이 많아 Font-Weight으로 위계 구분을 할 수 없을 때 사용할 수 있습니다.",
   },
   tertiary: {
     styleNm: "Tertiary",
     palette: "gray",
     depth: 500,
     hex: gray[500],
-    description:
-      "가장 약한 텍스트 색상입니다.\n상호 작용이 불가능한 비활성화 텍스트 또는 플레이스 홀더, 캡션에 사용합니다.",
   },
   invert: {
     styleNm: "Invert",
     palette: "gray",
     depth: 0,
     hex: gray[0],
-    description: "반전 텍스트 색상입니다. 배경이 어두운 경우 사용합니다.",
   },
   negative: {
     styleNm: "Negative",
     palette: "red",
     depth: 500,
     hex: red[500],
-    description: "부정의 텍스트 색상입니다.",
   },
   positive: {
     styleNm: "Positive",
     palette: "blue",
     depth: 500,
     hex: blue[500],
-    description: "긍정의 텍스트 색상입니다.",
   },
   info: {
     styleNm: "Info",
     palette: "navy",
     depth: 500,
     hex: navy[500],
-    description: "인포메이션 및 가이드 텍스트 색상입니다.",
   },
 };
 const icon = {
@@ -205,49 +186,42 @@ const icon = {
     palette: "gray",
     depth: 900,
     hex: gray[900],
-    description: "기본 아이콘 색상입니다.",
   },
   secondary: {
     styleNm: "Secondary",
     palette: "gray",
     depth: 700,
     hex: gray[700],
-    description: "두 번째 위계의 아이콘 색상입니다.",
   },
   tertiary: {
     styleNm: "Tertiary",
     palette: "gray",
     depth: 500,
     hex: gray[500],
-    description: "세 번째 위계의 아이콘 색상입니다.",
   },
   invert: {
     styleNm: "Invert",
     palette: "gray",
     depth: 0,
     hex: gray[0],
-    description: "반전 아이콘 색상입니다.",
   },
   negative: {
     styleNm: "Negative",
     palette: "red",
     depth: 500,
     hex: red[500],
-    description: "부정의 아이콘 색상입니다.",
   },
   positive: {
     styleNm: "Positive",
     palette: "blue",
     depth: 500,
     hex: blue[500],
-    description: "긍정의 아이콘 색상입니다.",
   },
   info: {
     styleNm: "Info",
     palette: "navy",
     depth: 500,
     hex: navy[500],
-    description: "인포메이션 및 가이드 아이콘 색상입니다.",
   },
 };
 const border = {
@@ -256,35 +230,30 @@ const border = {
     palette: "gray",
     depth: 300,
     hex: gray[300],
-    description: "기본 테두리 색상입니다.",
   },
   hover: {
     styleNm: "Hover",
     palette: "gray",
     depth: 500,
     hex: gray[500],
-    description: "Hover 테두리 색상입니다.(Web에서만 사용)",
   },
   tertiary: {
     styleNm: "Tertiary",
     palette: "gray",
     depth: 700,
     hex: gray[700],
-    description: "선택된 테두리 색상입니다.",
   },
   invert: {
     styleNm: "Invert",
     palette: "gray",
     depth: 200,
     hex: gray[200],
-    description: "상호 작용이 불가능한 비활성화된 테두리 색상입니다.",
   },
   negative: {
     styleNm: "Negative",
     palette: "red",
     depth: 500,
     hex: red[500],
-    description: "에러 표시 테두리 색상입니다.",
   },
 };
 const divider = {
@@ -293,14 +262,12 @@ const divider = {
     palette: "gray",
     depth: 200,
     hex: gray[200],
-    description: "기본 구분선 색상입니다.",
   },
   strong: {
     styleNm: "Strong",
     palette: "gray",
     depth: 400,
     hex: gray[400],
-    description: "특정 부분을 강조하기 위한 구분선 색상입니다.",
   },
 };
 export const token = { surface, text, icon, border, divider };

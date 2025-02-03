@@ -1,12 +1,5 @@
 export const banner = [
   {
-    bannerNo: 42532,
-    bannerTitle: "수요입점회",
-    bannerContent: "어디에도 없는\n막강한 □□% 할인",
-    bannerLink: "https://content.29cm.co.kr/welcoming_wednesday/2023/11/01/1st",
-    imageUrl: "https://img.29cm.co.kr/cm/202310/11ee77bc7f3794a58a7f7da735a852f3.jpg",
-  },
-  {
     bannerNo: 42531,
     bannerTitle: "선명하게 빛나는\n아름다움",
     bannerContent: "루에브르\n단독 ~15+5% 신상품 발매",
