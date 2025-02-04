@@ -33,6 +33,10 @@ interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
    */
   padding?: number | string;
   /**
+   * 컨테이너의 margin 값을 지정합니다.
+   */
+  margin?: number | string;
+  /**
    * 컨테이너의 배경색을 지정합니다.
    */
   bgColor?:
@@ -63,6 +67,7 @@ export const Container = ({
   align = "center",
   spacing = 16,
   radius,
+  margin,
   padding,
   bgColor,
   borderColor,
@@ -75,6 +80,7 @@ export const Container = ({
     background-color: ${bgColor ? token.surface[bgColor]?.hex : "transparent"};
     ${borderColor ? `border: 1px solid ${token.border[borderColor]?.hex}` : ""};
     border-radius: ${radius || 0}px;
+    margin: ${margin || 0};
     padding: ${padding || 0};
     font-family: "Pretendard300";
   `;

@@ -96,21 +96,17 @@ export default function Card({ feedTitle, feedContents, imageUrl, relatedProduct
   return (
     <Container className="feed-card" spacing={12}>
       <CardWrapper className="card surface-secondary">
-        <Container spacing={16}>
-          {imageUrl ? (
-            <ImageWrapper>
-              <img src={imageUrl} alt="카드 이미지" />
-            </ImageWrapper>
-          ) : (
-            <Container padding="2px 0 0" />
-          )}
-          <Container spacing={6} padding="0 20px">
-            <Title>{feedTitle}</Title>
-            <Body>{feedContents}</Body>
-          </Container>
+        {imageUrl && (
+          <ImageWrapper>
+            <img src={imageUrl} alt="카드 이미지" />
+          </ImageWrapper>
+        )}
+        <Container spacing={6} padding="18px 20px 0">
+          <Title>{feedTitle}</Title>
+          <Body>{feedContents}</Body>
         </Container>
         {relatedProducts && (
-          <Container className="product-list" padding="18px 20px">
+          <Container className="product-list" margin="18px 20px 0">
             {relatedProducts.map((product) => (
               <ProductListItem key={product.productNo} {...product} />
             ))}

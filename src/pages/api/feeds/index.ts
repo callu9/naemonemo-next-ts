@@ -12,3 +12,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
   } else return res.status(HTTP_STATUS_CODE.NOT_METHOD_ALLOWED).json(RESPONSE_NOT_METHOD_ALLOWED);
 }
+
+export type Feed = typeof feeds;
+export async function getFeedList() {
+  const res = await fetch("http://localhost:3000/api/feeds");
+  const feedList = (await res.json()).data;
+  return feedList;
+}
