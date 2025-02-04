@@ -1,6 +1,6 @@
-# naemonemo-next-ts 🟫
+# naemonemo-next-ts 
 
-내모네모 (내 모든 네모 속 세상) 쇼핑몰 웹앱 프로젝트입니다.
+⬛⬜내모네모 (내 모든 네모 속 세상)⬜⬛ 쇼핑몰 웹앱 프로젝트입니다.
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 

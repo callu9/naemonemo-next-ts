@@ -17,6 +17,7 @@ import IconUpload from "../assets/icon/upload.svg";
 import IconVisible from "../assets/icon/visibility.svg";
 import IconInvisible from "../assets/icon/visibility_off.svg";
 import { token } from "../foundation/color";
+import Image from "next/image";
 
 /**
  * 아이콘명에 따른 아이콘 컴포넌트 및 회전 각도 지정
@@ -81,14 +82,16 @@ export const Icon = ({
   iconColorHex,
   ...props
 }: IconProps) => {
-  const IconProps = Object(IconObj)[iconNm];
-  const StyledIcon = styled(IconProps.component)`
-    transform: rotate(${IconProps.rotate || 0}deg);
+  const IconImage = Object(IconObj)[iconNm] || IconConfirm;
+  console.log(IconImage);
+
+  const StyledIcon = styled(IconImage.component)`
+    transform: rotate(${IconImage.rotate || 0}deg);
     width: ${iconSize}px;
     height: ${iconSize}px;
     fill: ${(iconColor && Object(token.icon)[iconColor]?.hex) ||
     iconColorHex ||
     token.icon.primary};
   `;
-  return IconProps ? <StyledIcon className={iconNm} {...props} /> : <></>;
+  return IconImage ? <StyledIcon className={iconNm} {...props} /> : <></>;
 };
