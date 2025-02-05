@@ -1,3 +1,4 @@
+import { Container } from "@/atom/Container";
 import { Icon } from "@/atom/Icon";
 import { Lable } from "@/atom/Text";
 import { layout } from "@/foundation/layout";
@@ -6,18 +7,27 @@ import styled from "styled-components";
 
 function GateListItem({ gateId, gateTitle, imageUrl, linkValue }: Gate) {
   const GateWrapper = styled.div`
-    padding: 4px 16px 4px 4px;
+    // width: 100%;
+    min-width: max-content;
+    border: 1px solid var(--gray-300);
+    padding: 4px 12px 4px 4px;
     background-color: white;
     border-radius: 9999px;
-    border: 1px solid var(--gray-200);
     cursor: pointer;
-    ${layout.flex({})}
+    ${layout.flex({ justify: "flex-start", spacing: 8 })}
+    & > * {
+      cursor: pointer;
+    }
+    & .grid-container {
+      flex-grow: 1;
+    }
   `;
   const ImageWrapper = styled.div`
     width: 38px;
     height: 38px;
     border-radius: 100%;
     overflow: hidden;
+    border: 1px solid var(--gray-200);
     & > img {
       object-fit: cover;
     }
@@ -27,18 +37,18 @@ function GateListItem({ gateId, gateTitle, imageUrl, linkValue }: Gate) {
       <ImageWrapper>
         <img src={imageUrl} alt="게이트 미리보기 이미지" />
       </ImageWrapper>
-      <Lable>{gateTitle}</Lable>
-      {/* <Icon iconNm="chevronRight" iconColorHex="var(--gray-300)" /> */}
+      <Container display="flex" justify="space-between">
+        <Lable>{gateTitle}</Lable>
+        <Icon iconNm="chevronRight" iconColor="secondary" />
+      </Container>
     </GateWrapper>
   );
 }
 export default function Gates({ gateList }: { gateList: GateList }) {
   const GateListWrapper = styled.div`
-    width: max-content;
-    ${layout.grid({ justify: "flex-start", direction: "column" })}
-    grid-template-row: repeat(2, auto);
-    grid-template-columns: repeat(4, auto);
-    overflow-x: auto;
+    ${layout.grid({ justify: "flex-start", spacing: 16 })}
+    grid-template: repeat(2, 1fr) / repeat(5, 1fr);
+    grid-auto-flow: column;
   `;
   return (
     <GateListWrapper>

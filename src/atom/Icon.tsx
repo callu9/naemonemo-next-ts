@@ -1,3 +1,4 @@
+import { token } from "@/foundation/color";
 import styled from "styled-components";
 import IconAdd from "../assets/icon/add.svg";
 import IconConfirm from "../assets/icon/check_circle.svg";
@@ -16,34 +17,56 @@ import IconSearch from "../assets/icon/search.svg";
 import IconUpload from "../assets/icon/upload.svg";
 import IconVisible from "../assets/icon/visibility.svg";
 import IconInvisible from "../assets/icon/visibility_off.svg";
-import { token } from "../foundation/color";
-import Image from "next/image";
 
 /**
  * 아이콘명에 따른 아이콘 컴포넌트 및 회전 각도 지정
  */
-export const IconObj = {
-  chevronLess: { component: IconChevron, rotate: 0 },
-  chevronRight: { component: IconChevron, rotate: 90 },
-  chevronMore: { component: IconChevron, rotate: 180 },
-  chevronLeft: { component: IconChevron, rotate: 270 },
-  add: { component: IconAdd },
-  remove: { component: IconRemove },
-  refresh: { component: IconRefresh },
-  search: { component: IconSearch },
-  close: { component: IconClose },
-  upload: { component: IconUpload },
-  download: { component: IconDownload },
-  noti: { component: IconNoti },
-  confirm: { component: IconConfirm },
-  visible: { component: IconVisible },
-  invisible: { component: IconInvisible },
-  radio: { component: RadioActive },
-  unchecked: { component: Unchecked },
-  checked: { component: Checked },
-  uncheckedSquare: { component: UncheckedSquare },
-  checkedSquare: { component: CheckedSquare },
-};
+function IconObj(iconNm: string): { component?: any; rotate?: number } {
+  switch (iconNm) {
+    case "chevronLess":
+      return { component: IconChevron, rotate: 0 };
+    case "chevronRight":
+      return { component: IconChevron, rotate: 90 };
+    case "chevronMore":
+      return { component: IconChevron, rotate: 180 };
+    case "chevronLeft":
+      return { component: IconChevron, rotate: 270 };
+    case "add":
+      return { component: IconAdd };
+    case "remove":
+      return { component: IconRemove };
+    case "refresh":
+      return { component: IconRefresh };
+    case "search":
+      return { component: IconSearch };
+    case "close":
+      return { component: IconClose };
+    case "upload":
+      return { component: IconUpload };
+    case "download":
+      return { component: IconDownload };
+    case "noti":
+      return { component: IconNoti };
+    case "confirm":
+      return { component: IconConfirm };
+    case "visible":
+      return { component: IconVisible };
+    case "invisible":
+      return { component: IconInvisible };
+    case "radio":
+      return { component: RadioActive };
+    case "unchecked":
+      return { component: Unchecked };
+    case "checked":
+      return { component: Checked };
+    case "uncheckedSquare":
+      return { component: UncheckedSquare };
+    case "checkedSquare":
+      return { component: CheckedSquare };
+    default:
+      return {};
+  }
+}
 
 export interface IconProps {
   /**
@@ -82,16 +105,14 @@ export const Icon = ({
   iconColorHex,
   ...props
 }: IconProps) => {
-  const IconImage = Object(IconObj)[iconNm] || IconConfirm;
-  console.log(IconImage);
-
+  const fillColor =
+    (iconColor && Object(token.icon)[iconColor]?.hex) || iconColorHex || token.icon.primary;
+  const IconImage = IconObj(iconNm);
   const StyledIcon = styled(IconImage.component)`
     transform: rotate(${IconImage.rotate || 0}deg);
     width: ${iconSize}px;
     height: ${iconSize}px;
-    fill: ${(iconColor && Object(token.icon)[iconColor]?.hex) ||
-    iconColorHex ||
-    token.icon.primary};
+    fill: ${fillColor};
   `;
-  return IconImage ? <StyledIcon className={iconNm} {...props} /> : <></>;
+  return <StyledIcon {...props} className={iconNm} width={iconSize} height={iconSize} />;
 };

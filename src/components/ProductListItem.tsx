@@ -1,7 +1,6 @@
 import { Container } from "@/atom/Container";
 import { Body } from "@/atom/Text";
 import { Product } from "@/pages/api/feeds";
-import Image from "next/image";
 import styled from "styled-components";
 import ToggleIcon from "../assets/icon/toggledIconButton_false.svg";
 
@@ -31,17 +30,14 @@ export default function ProductListItem({ imageUrl, productName, price }: Produc
   const ToggledIconButton = styled.button`
     border: 0;
     padding: 0;
-    margin: 0;
+    margin: 0;O
     width: 24px;
     height: 24px;
     background-color: transparent;
-  `;
-  const StyledIcon = styled((props) => (
-    <Image {...props} src={ToggleIcon} alt="toggled-icon-button image" />
-  ))`
-    width: 24px;
-    height: 24px;
     cursor: pointer;
+  `;
+  const StyledIcon = styled(ToggleIcon)`
+    width: 24px;
   `;
   return (
     <ProductWrapper>
@@ -56,7 +52,7 @@ export default function ProductListItem({ imageUrl, productName, price }: Produc
           <Body>{new Intl.NumberFormat("ko-KR").format(price)}원</Body>
         </Container>
         <ToggledIconButton>
-          <StyledIcon />
+          <StyledIcon width="24" height="24" />
         </ToggledIconButton>
       </Container>
     </ProductWrapper>

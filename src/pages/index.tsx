@@ -1,10 +1,10 @@
 import { Container } from "@/atom/Container";
 import { Heading } from "@/atom/Text";
 import Card from "@/components/Card";
+import Gates from "@/components/Gate";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { Feed, FeedList, getFeedList } from "./api/feeds";
 import { GateList, getGateList } from "./api/gates";
-import Gates from "@/components/Gate";
 
 export const getServerSideProps = (async () => {
   const gateList = await getGateList();
@@ -18,10 +18,10 @@ export default function Home({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <div className="grid gap-56">
-      <Container className="slider-card-list" radius={8} padding="16px 8px">
+      <Container className="slider-list" radius={8} padding="16px 8px">
         <Heading>Slider Area</Heading>
       </Container>
-      <Container className="gate-card-list" style={{ maxWidth: "336px", overflow: "scroll" }}>
+      <Container className="gate-list" style={{ maxWidth: "336px", overflow: "scroll" }}>
         <Gates {...{ gateList }} />
       </Container>
       <Container className="feed-card-list" spacing={60}>
