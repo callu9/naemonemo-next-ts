@@ -1,0 +1,63 @@
+.display-grid {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+.display-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+// Grid, Flex - Justify
+$justify-list: (
+  "left": flex-start,
+  "right": flex-end,
+  "center": center,
+  "sides": space-between,
+  "evenly": space-evenly,
+  "stretch": stretch,
+);
+@each $name, $justify in $justify-list {
+  .display-grid.justify-#{$name},
+  .display-flex.justify-#{$name} {
+    justify-content: $justify;
+  }
+}
+// Grid, Flex - Align
+$align-list: (
+  "upper": flex-start,
+  "center": center,
+  "lower": flex-end,
+  "stretch": stretch,
+  "sides": space-between,
+  "evenly": space-evenly,
+);
+@each $name, $align in $align-list {
+  .grid.#{$name},
+  .flex.#{$name} {
+    align-items: $align;
+  }
+}
+.display-flex.direction-row,
+.display-grid.direction-row {
+  flex-direction: row;
+}
+.display-flex.direction-column,
+.display-grid.direction-column {
+  flex-direction: column;
+}
+// Spacing (Gap)
+$spacing-list: 0, 2, 4, 8, 12, 16, 20, 24, 32, 40, 56, 64, 72;
+@each $spacing in $spacing-list {
+  .gap-#{$spacing} {
+    gap: #{$spacing}px;
+  }
+}
+// Border Radius
+$radius-list: 0, 4, 8, 12, 16;
+@each $radius in $radius-list {
+  .radius-#{$radius} {
+    border-radius: #{$radius}px;
+  }
+}

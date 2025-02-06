@@ -9,7 +9,6 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 - Atomic Design Pattern 적용<br />
   (Foundation -> Atomic -> Component -> Template -> Page)
-- styled-components 적용
 
 ## Updates 📝
 
@@ -66,7 +65,7 @@ src/app/
 |   +-- order/
 |   |   +-- OrderProductList.tsx
 
-+-- pages/
++-- app/(route)/
 |   +-- product/
 |   |   +-- index.tsx
 |   +-- order/
@@ -130,7 +129,6 @@ This project was bootstrapped with [Create React App(CRA)](https://github.com/fa
 ```
 npm install npx -g
 npx create-next-app@latest naemonemo-next-ts --typescript
-npm i styled-components
 ```
 
 ## Quick Start 🚀

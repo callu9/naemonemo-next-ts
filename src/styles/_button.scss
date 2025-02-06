@@ -1,0 +1,76 @@
+@use "../foundation/color";
+@use "../foundation/typography";
+
+/* Button Sizes */
+$button-sizes-list: (
+  "large": (
+    "padding": "16px 32px",
+    "height": "54px",
+  ),
+  "medium": (
+    "padding": "14px 32px",
+    "height": "48px",
+  ),
+  "small": (
+    "padding": "7px 24px",
+    "height": "40px",
+  ),
+);
+@each $size, $styles in $button-sizes-list {
+  .button-#{$size} {
+    @extend .body-#{$size};
+    @each $prop, $value in $styles {
+      #{$prop}: #{$value};
+    }
+  }
+}
+
+$button-color-list: (
+  "outlined": (
+    "surface": "primary",
+    "border": "default",
+    "text": "secondary",
+  ),
+  "warning": (
+    "surface": "warning",
+    "border": "none",
+    "text": "invert",
+  ),
+  "negative": (
+    "surface": "negative",
+    "border": "none",
+    "text": "negative",
+  ),
+  "positive": (
+    "surface": "positive",
+    "border": "none",
+    "text": "positive",
+  ),
+  "info": (
+    "surface": "info",
+    "border": "none",
+    "text": "info",
+  ),
+  "invert": (
+    "surface": "invert",
+    "border": "none",
+    "text": "invert",
+  ),
+  "disabled": (
+    "surface": "tertiary",
+    "border": "none",
+    "text": "tertiary",
+  ),
+);
+@each $styleNm, $styles in $button-color-list {
+  .button-#{$styleNm} {
+    @each $prop, $value in $styles {
+      @extend .#{$prop}-#{$value};
+      @if ($prop == "text") {
+        svg {
+          @extend .icon-#{$value};
+        }
+      }
+    }
+  }
+}

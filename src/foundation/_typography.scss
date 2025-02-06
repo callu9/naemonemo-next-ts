@@ -1,0 +1,147 @@
+@use "sass:list";
+@mixin typography($weight: 400, $fontSize: 14, $fontSizeMobile: 12) {
+  font-family: "Pretendard#{$weight}";
+  font-size: #{$fontSize}px;
+  line-height: 130%;
+  letter-spacing: 0%;
+  @media (width < 800px) {
+    font-size: #{$fontSizeMobile}px;
+  }
+}
+$typo-list: (
+  "lable": (
+    "large": (
+      600,
+      18,
+      17,
+    ),
+    "medium": (
+      600,
+      15,
+      15,
+    ),
+    "small": (
+      600,
+      14,
+      13,
+    ),
+  ),
+  "body": (
+    "large": (
+      400,
+      18,
+      17,
+    ),
+    "medium": (
+      400,
+      15,
+      15,
+    ),
+    "small": (
+      400,
+      14,
+      13,
+    ),
+    "extra-small": (
+      400,
+      13,
+      12,
+    ),
+  ),
+  "title": (
+    "large": (
+      600,
+      27,
+      23,
+    ),
+    "medium": (
+      600,
+      24,
+      21,
+    ),
+    "small": (
+      600,
+      21,
+      19,
+    ),
+  ),
+  "headline": (
+    "large": (
+      600,
+      36,
+      29,
+    ),
+    "medium": (
+      600,
+      33,
+      27,
+    ),
+    "small": (
+      600,
+      30,
+      25,
+    ),
+  ),
+  "display": (
+    "large": (
+      600,
+      48,
+      40,
+    ),
+    "medium": (
+      600,
+      44,
+      38,
+    ),
+    "small": (
+      600,
+      42,
+      36,
+    ),
+  ),
+);
+
+* {
+  @include typography();
+}
+label {
+  @extend .lable-medium;
+}
+h6 {
+  @extend .title-small;
+}
+h5 {
+  @extend .title-medium;
+}
+h4 {
+  @extend .title-large;
+}
+h3 {
+  @extend .headline-small;
+}
+h2 {
+  @extend .headline-medium;
+}
+h1 {
+  @extend .headline-large;
+}
+@each $usage, $styles in $typo-list {
+  @each $styleNm, $values in ($styles) {
+    .#{$usage}-#{$styleNm} {
+      @include typography(list.nth($values, 1), list.nth($values, 2), list.nth($values, 3));
+    }
+  }
+}
+/* Font Weight */
+.text-light {
+  font-family: "Pretendard300";
+}
+.text-regular {
+  font-family: "Pretendard400";
+}
+.text-medium {
+  font-family: "Pretendard500";
+}
+.text-bold {
+  font-family: "Pretendard600";
+}

@@ -1,5 +1,5 @@
-import { token } from "@/foundation/color";
-import styled from "styled-components";
+"use client";
+
 import IconAdd from "../assets/icon/add.svg";
 import IconConfirm from "../assets/icon/check_circle.svg";
 import Unchecked from "../assets/icon/check_false.svg";
@@ -105,14 +105,9 @@ export const Icon = ({
   iconColorHex,
   ...props
 }: IconProps) => {
-  const fillColor =
-    (iconColor && Object(token.icon)[iconColor]?.hex) || iconColorHex || token.icon.primary;
-  const IconImage = IconObj(iconNm);
-  const StyledIcon = styled(IconImage.component)`
-    transform: rotate(${IconImage.rotate || 0}deg);
-    width: ${iconSize}px;
-    height: ${iconSize}px;
-    fill: ${fillColor};
-  `;
-  return <StyledIcon {...props} className={iconNm} width={iconSize} height={iconSize} />;
+  const fillColor = iconColor || iconColorHex || "primary";
+  const IconComponent = IconObj(iconNm).component;
+  return (
+    <IconComponent {...props} className={`icon-${fillColor}`} width={iconSize} height={iconSize} />
+  );
 };

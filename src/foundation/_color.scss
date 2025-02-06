@@ -1,0 +1,77 @@
+/* Surface (background-color) */
+$surface-color-list: (
+  "primary": var(--gray-0),
+  "secondary": var(--gray-100),
+  "tertiary": var(--gray-200),
+  "invert": var(--gray-900),
+  "warning": var(--red-500),
+  "negative": var(--red-50),
+  "positive": var(--blue-50),
+  "info": var(--navy-50),
+);
+@each $name, $hex in $surface-color-list {
+  .surface-#{$name} {
+    background-color: $hex;
+  }
+}
+
+/* Text (color) */
+$text-color-list: (
+  "primary": var(--gray-900),
+  "secondary": var(--gray-700),
+  "tertiary": var(--gray-500),
+  "invert": var(--gray-0),
+  "negative": var(--red-500),
+  "positive": var(--blue-500),
+  "info": var(--navy-500),
+);
+@each $name, $hex in $text-color-list {
+  .text-#{$name} {
+    color: $hex;
+  }
+}
+
+/* Icon (svg fill) */
+$icon-color-list: (
+  "primary": var(--gray-900),
+  "secondary": var(--gray-700),
+  "tertiary": var(--gray-500),
+  "invert": var(--gray-0),
+  "negative": var(--red-500),
+  "positive": var(--blue-500),
+  "info": var(--navy-500),
+);
+@each $name, $hex in $icon-color-list {
+  .icon-#{$name} {
+    fill: $hex;
+  }
+}
+
+/* Border */
+$border-color-list: (
+  "default": var(--gray-300),
+  "hover": var(--gray-500),
+  "tertiary": var(--gray-700),
+  "invert": var(--gray-2000),
+  "negative": var(--red-500),
+);
+@each $name, $hex in $border-color-list {
+  .border-#{$name} {
+    border: $hex;
+  }
+}
+.border-none {
+  border: 0;
+}
+
+/* Divider */
+hr {
+  background-color: transparent;
+  height: 0;
+}
+hr.divider-default {
+  border: 1px solid var(--gray-200);
+}
+hr.divider-strong {
+  border: 1px solid var(--gray-400);
+}

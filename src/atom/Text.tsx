@@ -1,150 +1,8 @@
-import { HTMLAttributes, LabelHTMLAttributes } from "react";
-import styled from "styled-components";
-import { token } from "../foundation/color";
-import { usage } from "../foundation/typography";
+"use client";
 
-export type fontColor =
-  | "primary"
-  | "secondary"
-  | "tertiary"
-  | "invert"
-  | "negative"
-  | "positive"
-  | "info";
+import { HTMLAttributes } from "react";
+
 interface TypographyProps extends HTMLAttributes<Element> {
-  weight?: 300 | 400 | 500 | 600;
-  fontStyle?: "Large" | "Medium" | "Small" | "ExtraSmall";
-  fontColor?: fontColor;
-  style?: React.CSSProperties;
-}
-const getTypoStyleProps = (props: {
-  webSize?: number;
-  mobileSize?: number;
-  weight: number;
-  fontColor?: fontColor;
-}) =>
-  `font-size: ${props.webSize}px;
-    @media (width < 800) {
-      font-size: ${props.mobileSize}px;
-    }
-    font-family: "Pretendard${props.weight}";
-    color: ${props.fontColor ? token.text[props.fontColor]?.hex : "inherit"};
-    margin: 0;
-  `;
-
-export const Display = ({
-  weight = 600,
-  fontStyle = "Medium",
-  fontColor,
-  ...props
-}: TypographyProps) => {
-  const fontSizes: object =
-    Object.values(usage)?.find(
-      (el) => el.styleNm === fontStyle && el.usageWeb?.startsWith("display")
-    ) || usage[".display2"];
-  const StyledDisplay = styled.p`
-    ${getTypoStyleProps({ ...fontSizes, weight, fontColor })}
-  `;
-  return (
-    <StyledDisplay className="display" {...props}>
-      {props.children}
-    </StyledDisplay>
-  );
-};
-export const Heading = ({
-  weight = 600,
-  fontStyle = "Large",
-  fontColor,
-  ...props
-}: TypographyProps) => {
-  const fontSizes: object =
-    Object.values(usage)?.find(
-      (el) => el.styleNm === fontStyle && el.usageMobile?.startsWith("headline")
-    ) || usage.h1;
-  const StyledHeading = (fontStyle === "Large"
-    ? styled.h1
-    : fontStyle === "Medium"
-    ? styled.h2
-    : styled.h3)`${getTypoStyleProps({ ...fontSizes, weight, fontColor })}`;
-  return (
-    <StyledHeading className="heading" {...props}>
-      {props.children}
-    </StyledHeading>
-  );
-};
-export const Title = ({
-  weight = 600,
-  fontStyle = "Medium",
-  fontColor,
-  ...props
-}: TypographyProps) => {
-  const fontSizes: object =
-    Object.values(usage)?.find(
-      (el) => el.styleNm === fontStyle && el.usageMobile?.startsWith("title")
-    ) || usage.h5;
-  const StyledTitle = (fontStyle === "Medium"
-    ? styled.h5
-    : fontStyle === "Large"
-    ? styled.h4
-    : styled.h6)`${getTypoStyleProps({ ...fontSizes, weight, fontColor })}`;
-  return (
-    <StyledTitle className="title" {...props}>
-      {props.children}
-    </StyledTitle>
-  );
-};
-export const Body = ({
-  weight = 400,
-  fontStyle = "Small",
-  fontColor,
-  ...props
-}: TypographyProps) => {
-  const fontSizes: object =
-    Object.values(usage)?.find(
-      (el) => el.styleNm === fontStyle && el.usageMobile?.startsWith("body")
-    ) || usage.p;
-  const StyledBody = styled.p`
-    ${getTypoStyleProps({ ...fontSizes, weight, fontColor })}
-  `;
-  return (
-    <StyledBody className={`body ${weight}`} {...props}>
-      {props.children}
-    </StyledBody>
-  );
-};
-interface LableProps extends LabelHTMLAttributes<HTMLLabelElement> {
-  required?: boolean;
-  weight?: 300 | 400 | 500 | 600;
-  fontStyle?: "Large" | "Medium" | "Small" | "ExtraSmall";
-  fontColor?: fontColor;
-  style?: React.CSSProperties;
-}
-export const Lable = ({
-  weight = 600,
-  fontStyle = "Medium",
-  fontColor,
-  required = false,
-  ...props
-}: LableProps) => {
-  const fontSizes: object =
-    Object.values(usage)?.find(
-      (el) => el.styleNm === fontStyle && el.usageMobile?.startsWith("label")
-    ) || usage.label;
-  const StyledLable = styled.label`
-    ${getTypoStyleProps({ ...fontSizes, weight, fontColor })}
-    &.essential::after {
-      content: "*";
-      color: ${token.text.negative.hex};
-      padding-left: 2px;
-    }
-  `;
-  return (
-    <StyledLable className={required ? "essential" : ""} {...props}>
-      {props.children}
-    </StyledLable>
-  );
-};
-interface TextProps {
   /**
    * 텍스트 용도를 지정합니다.
    */
@@ -156,28 +14,49 @@ interface TextProps {
   /**
    * font weight를 지정합니다.
    */
-  weight?: 300 | 400 | 500 | 600;
+  weight?: "light" | "regular" | "medium" | "bold";
   /**
    * font style(size)를 지정합니다.
    */
-  fontStyle?: "Large" | "Medium" | "Small" | "ExtraSmall";
+  fontStyle?: "large" | "medium" | "small" | "extra-small";
   /**
    * font color를 지정합니다.
    */
-  fontColor?: fontColor;
-  style?: React.CSSProperties;
+  fontColor?: "primary" | "secondary" | "tertiary" | "invert" | "negative" | "positive" | "info";
 }
-export const Text = ({ usage = "body", ...props }: TextProps) => {
+export const Text = ({
+  usage = "body",
+  fontStyle = "medium",
+  fontColor = "primary",
+  ...props
+}: TypographyProps) => {
+  const styleName = `${usage}-${fontStyle} text-${fontColor} ${
+    props.weight ? `text-${props.weight}` : ""
+  }`;
   switch (usage) {
-    case "display":
-      return <Display {...props} />;
-    case "headline":
-      return <Heading {...props} />;
-    case "title":
-      return <Title {...props} />;
     case "lable":
-      return <Lable {...props} />;
+      return <label className={styleName} {...props} />;
+    case "headline":
+      switch (fontStyle) {
+        case "large":
+          return <h1 className={styleName} {...props} />;
+        case "small":
+          return <h3 className={styleName} {...props} />;
+        case "medium":
+        default:
+          return <h2 className={styleName} {...props} />;
+      }
+    case "title":
+      switch (fontStyle) {
+        case "large":
+          return <h4 className={styleName} {...props} />;
+        case "small":
+          return <h6 className={styleName} {...props} />;
+        case "medium":
+        default:
+          return <h5 className={styleName} {...props} />;
+      }
     default:
-      return <Body {...props} />;
+      return <p className={styleName} {...props} />;
   }
 };
