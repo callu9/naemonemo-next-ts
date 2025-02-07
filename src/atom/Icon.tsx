@@ -108,6 +108,11 @@ export const Icon = ({
   const fillColor = iconColor || iconColorHex || "primary";
   const IconComponent = IconObj(iconNm).component;
   return (
-    <IconComponent {...props} className={`icon-${fillColor}`} width={iconSize} height={iconSize} />
+    <IconComponent
+      {...props}
+      className={`icon-${fillColor} icon-rotate-${IconObj(iconNm).rotate || 0}`}
+      width={iconSize}
+      height={iconSize}
+    />
   );
 };

@@ -28,35 +28,36 @@ export const Text = ({
   usage = "body",
   fontStyle = "medium",
   fontColor = "primary",
+  weight,
+  className,
   ...props
 }: TypographyProps) => {
-  const styleName = `${usage}-${fontStyle} text-${fontColor} ${
-    props.weight ? `text-${props.weight}` : ""
-  }`;
+  const styleName = `${usage}-${fontStyle} text-${fontColor} ${weight ? `text-${weight}`:""}`;
+  const classList = [className, styleName].join(" ");
   switch (usage) {
     case "lable":
-      return <label className={styleName} {...props} />;
+      return <label className={classList} {...props} />;
     case "headline":
       switch (fontStyle) {
         case "large":
-          return <h1 className={styleName} {...props} />;
+          return <h1 className={classList} {...props} />;
         case "small":
-          return <h3 className={styleName} {...props} />;
+          return <h3 className={classList} {...props} />;
         case "medium":
         default:
-          return <h2 className={styleName} {...props} />;
+          return <h2 className={classList} {...props} />;
       }
     case "title":
       switch (fontStyle) {
         case "large":
-          return <h4 className={styleName} {...props} />;
+          return <h4 className={classList} {...props} />;
         case "small":
-          return <h6 className={styleName} {...props} />;
+          return <h6 className={classList} {...props} />;
         case "medium":
         default:
-          return <h5 className={styleName} {...props} />;
+          return <h5 className={classList} {...props} />;
       }
     default:
-      return <p className={styleName} {...props} />;
+      return <p className={classList} {...props} />;
   }
 };

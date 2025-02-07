@@ -11,6 +11,6 @@ export async function GET() {
 }
 export async function getGateList() {
   const res = await fetch("http://localhost:3000/api/gates");
-  const gateList = (await res.json()).data;
+  const gateList = await res.json();
   return gateList;
 }

@@ -1,0 +1,66 @@
+.slider-list {
+  padding: 16px 8px;
+}
+.gate-list {
+  margin-left: 32px;
+  padding-right: 32px;
+  max-width: 368px;
+  box-sizing: border-box;
+  overflow-x: scroll;
+  > .gate-list-wrapper {
+    grid-auto-flow: row;
+    grid-template: repeat(2, 1fr) / repeat(4, 1fr);
+    width: max-content;
+    > .gate-wrapper {
+      border: 1px solid var(--gray-300);
+      padding: 4px 12px 4px 4px;
+      background-color: white;
+      border-radius: 9999px;
+      cursor: pointer;
+      > .gate-info {
+        flex-grow: 1;
+      }
+    }
+  }
+}
+.feed-list {
+  padding: 0 32px;
+  .card {
+    width: 335px;
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 0 0 18px;
+    > .card-info {
+      padding: 18px 20px 0;
+    }
+    > .product-list {
+      > .product-list-item {
+        padding: 12px 0;
+        border-top: 1px solid var(--gray-200);
+        > .product-wrapper {
+          grid-template-columns: 60px 1 24px;
+          > .product-info {
+            height: 60px;
+            flex-grow: 1;
+            > .product-name {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+            }
+          }
+        }
+        > .toggled-icon-button {
+          border: 0;
+          padding: 0;
+          margin: 0;
+          width: 24px;
+          height: 24px;
+          background-color: transparent;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

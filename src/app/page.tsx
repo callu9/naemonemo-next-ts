@@ -2,15 +2,16 @@ import { Container } from "@/atom/Container";
 import { Text } from "@/atom/Text";
 import Feeds from "@/template/Feeds";
 import Gates from "@/template/Gates";
+import "./home.scss";
 
-export default function Home() {
+export default async function Home() {
   return (
-    <div className="grid gap-56">
-      <Container className="slider-list" radius={8} style={{ padding: "16px 8px" }}>
+    <Container gap={56}>
+      <Container className="slider-list">
         <Text usage="display">Slider Area</Text>
       </Container>
       <Gates />
       <Feeds />
-    </div>
+    </Container>
   );
 }

@@ -12,6 +12,6 @@ export async function GET() {
 }
 export async function getFeedList() {
   const res = await fetch("http://localhost:3000/api/feeds");
-  const feedList = (await res.json()).data;
+  const feedList = await res.json();
   return feedList;
 }

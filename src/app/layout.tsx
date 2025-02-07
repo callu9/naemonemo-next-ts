@@ -14,21 +14,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body>
+        <div className="dimmed">
+          <section className="container-wrapper">{children}</section>
+        </div>
+      </body>
     </html>
   );
 }
-
-// const Dimmed = styled.div`
-// background-color: var(--gray-900);
-// display: flex;
-// justify-content: center;
-// `;
-// const ContainerWrapper = styled.div`
-// box-shadow: 0 0 40px var(--gray-600);
-// background-color: white;
-// @media (width > 400px) {
-//   padding: 52px 32px;
-//   width: fit-content;
-// }
-// `;

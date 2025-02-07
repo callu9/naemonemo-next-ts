@@ -57,7 +57,7 @@ $border-color-list: (
 );
 @each $name, $hex in $border-color-list {
   .border-#{$name} {
-    border: $hex;
+    border: 1px solid $hex;
   }
 }
 .border-none {

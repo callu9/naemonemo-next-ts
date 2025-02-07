@@ -6,7 +6,7 @@ interface ContainerProps extends HTMLAttributes<HTMLElement> {
    */
   display?: "grid" | "flex";
   /**
-   * 정렬 방향을 설정합니다. (display "flex" 한정)
+   * 정렬 방향을 설정합니다.
    */
   direction?: "row" | "column";
   /**
@@ -20,15 +20,15 @@ interface ContainerProps extends HTMLAttributes<HTMLElement> {
   /**
    * 자식 요소 간 간격을 설정합니다.
    */
-  spacing?: 0 | 2 | 4 | 8 | 12 | 16 | 20 | 24 | 32 | 40 | 56 | 64 | 72;
+  gap?: number;
   /**
    * 컨테이너의 corner radius를 지정합니다.
    */
-  radius?: 0 | 4 | 8 | 12 | 16;
+  radius?: number | 9999 | "circle";
   /**
    * 컨테이너의 배경색을 지정합니다.
    */
-  bgColor?:
+  surface?:
     | "primary"
     | "secondary"
     | "tertiary"
@@ -45,13 +45,25 @@ interface ContainerProps extends HTMLAttributes<HTMLElement> {
 /**
  * 배경색 및 테두리 색상을 쉽게 지정하고, 자식 요소간 정렬을 돕습니다.
  */
-export const Container = (props: ContainerProps) => {
-  const [keys, values] = Object.entries(props);
-  const styles = keys
-    .map((el: string, idx: number) => values[idx] && `${el}-${values[idx]}`)
-    .filter((el: string | false) => el);
+export const Container = ({ display = "grid", className, ...props }: ContainerProps) => {
+  const STYLE_KEYS = [
+    "display",
+    "direction",
+    "justify",
+    "align",
+    "gap",
+    "radius",
+    "surface",
+    "border",
+  ];
+  const entries = Object.entries({ ...{ ...props, display } });
+  const styles = entries
+    .map(([keyNm, value]: string[]) =>
+      STYLE_KEYS.includes(keyNm) ? value && `${keyNm}-${value}` : undefined
+    )
+    .filter((el: string | undefined) => el);
   return (
-    <div className={`container ${styles.join(" ")}`} {...props}>
+    <div {...props} className={`container ${className} ${styles.join(" ")}`}>
       {props.children}
     </div>
   );
