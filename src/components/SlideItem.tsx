@@ -2,24 +2,27 @@ import { Banner } from "@/app/api/banner/route";
 import { Container } from "@/atom/Container";
 import { Text } from "@/atom/Text";
 
-const renderParagraph = (paragraph: string) => {
-  const splited = paragraph.split("\n");
-  return splited.map((line: string, idx: number) => {
-    return (
-      <>
-        <span key={idx}>{line}</span>
-        {idx !== splited.length - 1 && <br />}
-      </>
-    );
-  });
-};
-export default function SlideItem({ bannerTitle, bannerContent, imageUrl }: Banner) {
+export default function SlideItem({ bannerNo, bannerTitle, bannerContent, imageUrl }: Banner) {
+  const renderParagraph = (keyNm: string, paragraph: string) => {
+    const splited = paragraph.split(/(\n)/);
+    console.log(splited);
+
+    return splited.map((line: string, idx: number) => {
+      return line === "\n" ? <br key={`${bannerNo}-${keyNm}-break-${idx}`} /> : line;
+    });
+  };
   return (
-    <Container className="slide-item" justify="left" align="lower" surface="tertiary">
+    <Container
+      className="slide-list-item"
+      justify="left"
+      align="lower"
+      surface="tertiary"
+      id={`banner-${bannerNo}`}
+    >
       <img src={imageUrl} alt="슬라이드 배너 이미지" />
-      <Container gap={16} color="invert">
-        <Text usage="headline">{renderParagraph(bannerTitle)}</Text>
-        <Text>{renderParagraph(bannerContent)}</Text>
+      <Container gap={12} color="invert">
+        <Text usage="headline">{renderParagraph("title", bannerTitle)}</Text>
+        <Text>{renderParagraph("content", bannerContent)}</Text>
       </Container>
     </Container>
   );
