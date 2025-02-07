@@ -8,7 +8,7 @@ export default async function Home() {
   return (
     <Container gap={56}>
       <Container className="slider-list">
-        <Text usage="display">Slider Area</Text>
+        <Text usage="headline">Slider Area</Text>
       </Container>
       <Gates />
       <Feeds />

@@ -14,7 +14,7 @@ interface TypographyProps extends HTMLAttributes<Element> {
   /**
    * font weight를 지정합니다.
    */
-  weight?: "light" | "regular" | "medium" | "bold";
+  weight?: "light" | "regular" | "medium" | "semibold" | "bold";
   /**
    * font style(size)를 지정합니다.
    */
@@ -32,7 +32,7 @@ export const Text = ({
   className,
   ...props
 }: TypographyProps) => {
-  const styleName = `${usage}-${fontStyle} text-${fontColor} ${weight ? `text-${weight}`:""}`;
+  const styleName = `${usage}-${fontStyle} text-${fontColor} ${weight ? `text-${weight}` : ""}`;
   const classList = [className, styleName].join(" ");
   switch (usage) {
     case "lable":

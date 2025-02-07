@@ -5,7 +5,6 @@
   margin-left: 32px;
   padding-right: 32px;
   max-width: 368px;
-  box-sizing: border-box;
   overflow-x: scroll;
   > .gate-list-wrapper {
     grid-auto-flow: row;
@@ -15,7 +14,6 @@
       border: 1px solid var(--gray-300);
       padding: 4px 12px 4px 4px;
       background-color: white;
-      border-radius: 9999px;
       cursor: pointer;
       > .gate-info {
         flex-grow: 1;

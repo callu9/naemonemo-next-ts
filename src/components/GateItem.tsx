@@ -6,14 +6,14 @@ import { Text } from "@/atom/Text";
 
 export default function GateListItem({ gateTitle, imageUrl }: Gate) {
   return (
-    <Container className="gate-wrapper" display="flex" justify="left" gap={8}>
+    <Container className="gate-wrapper" display="flex" justify="left" gap={8} radius={16}>
       {imageUrl && (
         <ImageBox
           imageUrl={imageUrl}
           alt="게이트 미리보기 이미지"
           width="38px"
           height="38px"
-          radius="circle"
+          radius={16}
           className="border-default"
         />
       )}

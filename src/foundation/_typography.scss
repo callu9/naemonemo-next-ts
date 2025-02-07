@@ -67,17 +67,17 @@ $typo-list: (
   ),
   "headline": (
     "large": (
-      600,
+      700,
       36,
       29,
     ),
     "medium": (
-      600,
+      700,
       33,
       27,
     ),
     "small": (
-      600,
+      700,
       30,
       25,
     ),
@@ -142,6 +142,9 @@ h1 {
 .text-medium {
   font-family: "Pretendard500";
 }
-.text-bold {
+.text-semibold {
   font-family: "Pretendard600";
+}
+.text-bold {
+  font-family: "Pretendard700";
 }

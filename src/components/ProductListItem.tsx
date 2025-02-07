@@ -9,7 +9,7 @@ export default function ProductListItem({ imageUrl, productName, price }: Produc
     <div className="product-list-item">
       <Container className="product-wrapper" display="flex" justify="sides" gap={16}>
         {imageUrl && (
-          <ImageBox imageUrl={imageUrl} alt="상품 이미지" width="60px" height="60px" radius={2} />
+          <ImageBox imageUrl={imageUrl} alt="상품 이미지" width="60px" height="60px" radius={8} />
         )}
         <Container
           className="product-info"

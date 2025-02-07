@@ -115,6 +115,12 @@
   font-family: "Pretendard600";
   src: url("../assets/font/Pretendard-SemiBold.woff2") format("woff2");
 }
+@font-face {
+  /* font-weight: 700 */
+  font-style: normal;
+  font-family: "Pretendard700";
+  src: url("../assets/font/Pretendard-Bold.woff2") format("woff2");
+}
 
 @media (max-width: 743px) {
   :root {
@@ -215,17 +221,29 @@ iframe {
   min-height: 100vh;
 }
 .container-wrapper {
+  position: relative;
   box-shadow: 0 0 40px var(--gray-600);
   background-color: white;
   @media (width > 400px) {
-    // padding: 52px 32px;
+    padding-bottom: 64px;
     width: fit-content;
     max-width: 800px;
+  }
+  > .header-nav {
+    min-width: 400px;
+    position: sticky;
+    box-shadow: 0px 10px 20px -10px var(--gray-300);
+    top: 0;
+    z-index: 1;
+    padding: 16px 32px;
+    background-color: white;
+    border-bottom: 1px solid var(--gray-300);
   }
 }
 .img-wrapper {
   aspect-ratio: 1;
   overflow: hidden;
+  background-color: var(--gray-900);
   > img {
     width: 100%;
     height: 100%;
