@@ -4,10 +4,8 @@ import { Text } from "@/atom/Text";
 
 export default function SlideItem({ bannerNo, bannerTitle, bannerContent, imageUrl }: Banner) {
   const renderParagraph = (keyNm: string, paragraph: string) => {
-    const splited = paragraph.split(/(\n)/);
-    console.log(splited);
-
-    return splited.map((line: string, idx: number) => {
+    const splitted = paragraph.split(/(\n)/);
+    return splitted.map((line: string, idx: number) => {
       return line === "\n" ? <br key={`${bannerNo}-${keyNm}-break-${idx}`} /> : line;
     });
   };

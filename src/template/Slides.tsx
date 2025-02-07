@@ -21,9 +21,10 @@ export default function Slides({ bannerList }: { bannerList: BannerList }) {
     const newIdx = (currentIdx + num + bannerList.length) % bannerList.length;
     setCurrentIdx(newIdx);
     const currentBannerNo = bannerList[newIdx].bannerNo;
+    const bannerElement = document.getElementById(`banner-${currentBannerNo}`);
     document
-      .getElementById(`banner-${currentBannerNo}`)
-      ?.scrollIntoView({ behavior: "smooth", block: "end" });
+      .getElementById("slide-wrapper")
+      ?.scrollTo({ behavior: "smooth", left: bannerElement?.offsetLeft });
   }
   return (
     <div className="slide-list">
@@ -33,7 +34,7 @@ export default function Slides({ bannerList }: { bannerList: BannerList }) {
         iconSize={48}
         onClick={() => onClickChevron(-1)}
       />
-      <Container className="slide-wrapper" display="flex" justify="left">
+      <Container className="slide-wrapper" display="flex" justify="left" id="slide-wrapper">
         {bannerList.map((banner) => (
           <SlideItem key={banner.bannerNo} {...banner} />
         ))}
