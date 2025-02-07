@@ -5,7 +5,7 @@ import Card from "@/components/FeedItem";
 export default async function Feeds() {
   const feedList = await getFeedList();
   return (
-    <Container className="feed-list" gap={64}>
+    <Container className="feed-list" gap={48}>
       {feedList?.map((feed: Feed) => (
         <Card key={feed.feedNo} {...feed} />
       ))}

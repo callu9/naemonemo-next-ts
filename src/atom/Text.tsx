@@ -27,12 +27,14 @@ interface TypographyProps extends HTMLAttributes<Element> {
 export const Text = ({
   usage = "body",
   fontStyle = "medium",
-  fontColor = "primary",
+  fontColor,
   weight,
   className,
   ...props
 }: TypographyProps) => {
-  const styleName = `${usage}-${fontStyle} text-${fontColor} ${weight ? `text-${weight}` : ""}`;
+  const styleName = `${usage}-${fontStyle} ${fontColor ? `text-${fontColor}` : ""} ${
+    weight ? `text-${weight}` : ""
+  }`;
   const classList = [className, styleName].join(" ");
   switch (usage) {
     case "lable":

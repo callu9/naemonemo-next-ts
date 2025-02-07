@@ -1,5 +1,6 @@
 "use client";
 
+import { HTMLAttributes } from "react";
 import IconAdd from "../assets/icon/add.svg";
 import IconConfirm from "../assets/icon/check_circle.svg";
 import Unchecked from "../assets/icon/check_false.svg";
@@ -68,7 +69,7 @@ function IconObj(iconNm: string): { component?: any; rotate?: number } {
   }
 }
 
-export interface IconProps {
+export interface IconProps extends HTMLAttributes<HTMLElement> {
   /**
    * 아이콘 명을 지정합니다.
    */
@@ -110,7 +111,7 @@ export const Icon = ({
   return (
     <IconComponent
       {...props}
-      className={`icon-${fillColor} icon-rotate-${IconObj(iconNm).rotate || 0}`}
+      className={`icon icon-${fillColor} icon-rotate-${IconObj(iconNm).rotate || 0}`}
       width={iconSize}
       height={iconSize}
     />

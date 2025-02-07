@@ -38,6 +38,18 @@ interface ContainerProps extends HTMLAttributes<HTMLElement> {
     | "positive"
     | "info";
   /**
+   * 컨테이너의 글씨 색상을 지정합니다.
+   */
+  color?:
+    | "primary"
+    | "secondary"
+    | "tertiary"
+    | "invert"
+    | "brand"
+    | "negative"
+    | "positive"
+    | "info";
+  /**
    * 컨테이너의 테두리 색상을 지정합니다.
    */
   borderColor?: "default" | "hover" | "tertiary" | "invert" | "negative";
@@ -45,7 +57,7 @@ interface ContainerProps extends HTMLAttributes<HTMLElement> {
 /**
  * 배경색 및 테두리 색상을 쉽게 지정하고, 자식 요소간 정렬을 돕습니다.
  */
-export const Container = ({ display = "grid", className, ...props }: ContainerProps) => {
+export const Container = ({ display = "grid", className, color, ...props }: ContainerProps) => {
   const STYLE_KEYS = [
     "display",
     "direction",
@@ -55,8 +67,9 @@ export const Container = ({ display = "grid", className, ...props }: ContainerPr
     "radius",
     "surface",
     "border",
+    "text",
   ];
-  const entries = Object.entries({ ...{ ...props, display } });
+  const entries = Object.entries({ ...{ ...props, display, text: color } });
   const styles = entries
     .map(([keyNm, value]: string[]) =>
       STYLE_KEYS.includes(keyNm) ? value && `${keyNm}-${value}` : undefined
