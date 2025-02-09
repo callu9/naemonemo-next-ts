@@ -8,14 +8,14 @@ import ImageBox from "@/atom/ImageBox";
 export default function Card({ feedTitle, feedContents, imageUrl, relatedProducts }: Feed) {
   return (
     <Container className="feed-card" gap={12}>
-      <Container className="card" surface="secondary" radius={8}>
+      <Container className="card" surface="secondary" radius={4}>
         {imageUrl && <ImageBox imageUrl={imageUrl} alt="카드 이미지" width="100%" height="100%" />}
         <Container className="card-info" gap={8}>
           <Text usage="title">{feedTitle}</Text>
           <Text>{feedContents}</Text>
         </Container>
         {relatedProducts && (
-          <Container className="product-list" style={{ margin: "18px 20px 0" }}>
+          <Container className="product-list">
             {relatedProducts.map((product) => (
               <ProductListItem key={product.productNo} {...product} />
             ))}
