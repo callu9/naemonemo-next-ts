@@ -1,0 +1,45 @@
+@keyframes loader-move {
+  0% {
+    left: 0;
+  }
+}
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+}
+.loader.dimmed {
+  align-items: center;
+  gap: 16px;
+  background-color: rgba($color: #000000, $alpha: 0.3);
+  > .loaders-wrapper {
+    position: relative;
+    > .loader-item {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      left: 0;
+      animation: loader-move 1s ease-in-out 0s infinite;
+    }
+    > .loader-item:first-child {
+      left: calc((24px + 16px) * (-2));
+      background-color: rgba($color: #ffffff, $alpha: 0.5);
+    }
+    > .loader-item:nth-child(2) {
+      left: calc((24px + 16px) * (-1));
+      background-color: rgba($color: #ffffff, $alpha: 0.6);
+    }
+    > .loader-item:nth-child(3) {
+      background-color: rgba($color: #ffffff, $alpha: 0.7);
+    }
+    > .loader-item:nth-child(4) {
+      left: calc(24px + 16px);
+
+      background-color: rgba($color: #ffffff, $alpha: 0.8);
+    }
+    > .loader-item:last-child {
+      left: calc((24px + 16px) * 2);
+      background-color: rgba($color: #ffffff, $alpha: 0.9);
+    }
+  }
+}

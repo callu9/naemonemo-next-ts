@@ -2,7 +2,7 @@ import { feeds } from "@/mocks";
 
 export type FeedList = typeof feeds;
 export type Feed = FeedList[0];
-export type Product = Feed["relatedProducts"][0];
+export type RelatedProduct = Feed["relatedProducts"][0];
 
 export async function GET() {
   return new Response(JSON.stringify(feeds), {

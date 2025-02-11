@@ -1,11 +1,17 @@
 import { Feed } from "@/app/api/feeds/route";
 import { Container } from "@/atom/Container";
-import { Text } from "@/atom/Text";
-import { Button } from "./common/Button";
-import ProductListItem from "./ProductListItem";
 import ImageBox from "@/atom/ImageBox";
+import { Text } from "@/atom/Text";
+import Link from "next/link";
+import ProductListItem from "./ProductListItem";
 
-export default function Card({ feedTitle, feedContents, imageUrl, relatedProducts }: Feed) {
+export default function Card({
+  feedTitle,
+  feedContents,
+  imageUrl,
+  relatedProducts,
+  recommendCode,
+}: Feed) {
   return (
     <Container className="feed-card" gap={12}>
       <Container className="card" surface="secondary" radius={4}>
@@ -22,7 +28,12 @@ export default function Card({ feedTitle, feedContents, imageUrl, relatedProduct
           </Container>
         )}
       </Container>
-      <Button property="invert">{relatedProducts.length ? "" : "모든 "}추천상품 보러가기</Button>
+      <Link
+        href={`/products?recommendCode=${recommendCode}`}
+        className="display-flex text-semibold button-medium button-invert"
+      >
+        {relatedProducts.length ? "" : "모든 "}추천상품 보러가기
+      </Link>
     </Container>
   );
 }

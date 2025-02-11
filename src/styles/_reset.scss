@@ -144,7 +144,7 @@ table {
   table-layout: fixed;
 }
 /* 스크롤바 제거 */
-body {
+html {
   overflow-y: auto;
   overflow-x: hidden;
   -ms-overflow-style: none; /* IE and Edge */

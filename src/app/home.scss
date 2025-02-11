@@ -21,7 +21,7 @@
     overflow-y: hidden;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
-    > .slide-list-item {
+    .slide-list-item {
       flex-shrink: 0;
       position: relative;
       aspect-ratio: 3 / 4;
@@ -64,7 +64,7 @@
     grid-auto-flow: row;
     grid-template: repeat(2, 1fr) / repeat(4, 1fr);
     width: max-content;
-    > .gate-wrapper {
+    .gate-wrapper {
       border: 1px solid var(--gray-300);
       padding: 4px 12px 4px 4px;
       background-color: white;

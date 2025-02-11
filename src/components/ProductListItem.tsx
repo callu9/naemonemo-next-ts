@@ -1,10 +1,10 @@
+import { RelatedProduct } from "@/app/api/feeds/route";
 import { Container } from "@/atom/Container";
-import { Product } from "@/app/api/feeds/route";
-import ToggleIcon from "../assets/icon/toggledIconButton_false.svg";
-import { Text } from "@/atom/Text";
 import ImageBox from "@/atom/ImageBox";
+import { Text } from "@/atom/Text";
+import ToggleIcon from "../assets/icon/toggledIconButton_false.svg";
 
-export default function ProductListItem({ imageUrl, productName, price }: Product) {
+export default function ProductListItem({ imageUrl, productName, price }: RelatedProduct) {
   return (
     <div className="product-list-item">
       <Container className="product-wrapper" display="flex" justify="sides" gap={16}>
