@@ -12,7 +12,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * 버튼 색상 속성을 지정합니다.
    */
-  property?: "outlined" | "brand" | "negative" | "positive" | "info" | "invert";
+  property?: "outlined" | "brand" | "negative" | "positive" | "info" | "invert" | "tertiary";
 }
 /**
  * 버튼은 사용자가 동작을 가능하게 할 때 사용합니다.
@@ -24,10 +24,14 @@ export function Button({
   size = "small",
   property = "outlined",
   radius = 0,
+  className,
   ...props
 }: ButtonProps) {
   return (
-    <button className={`button-${size}  button-${property} radius-${radius}`} {...props}>
+    <button
+      className={`${className} button-${size} button-${property} radius-${radius} display-flex`}
+      {...props}
+    >
       {props.children}
     </button>
   );

@@ -64,7 +64,7 @@ function ProductsHeader() {
       </li>
       <li>
         <Text fontStyle="large" weight="bold">
-          고객님을 위한 추천 상품
+          추천 상품 둘러보기
         </Text>
       </li>
       <li>

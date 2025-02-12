@@ -6,30 +6,35 @@ export type Product = ProductList[0];
 
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
-  const recommendCode = Number(searchParams.get("recommendCode") || 0);
+  const codeList = [];
+  for (const [keyNm, value] of searchParams.entries()) {
+    if (keyNm === "recommendCode") codeList.push(Number(value));
+  }
   const offset = Number(searchParams.get("offset") || 0);
   const limit = Number(searchParams.get("limit") || 10);
-  const filteredResult = getFilteredProducts(recommendCode, offset, limit);
+  const filteredResult = getFilteredProducts(codeList, offset, limit);
   return new Response(JSON.stringify(filteredResult), {
     status: 200,
     headers: { "Content-Type": "application/json" },
   });
 }
-export async function getProductList(recommendCode: number, offset: number) {
-  const res = await fetch(
-    `http://localhost:3000/api/products?recommendCode=${recommendCode}&offset=${offset}`
-  );
+export async function getProductList(codeList: number[], offset: number) {
+  const URL = "http://localhost:3000/api/products";
+  const params = new URLSearchParams();
+  codeList.map((recommendCode) => params.append("recommendCode", String(recommendCode)));
+  params.append("offset", String(offset));
+  const res = await fetch(`${URL}?${params}`);
   const result = await res.json();
   return result;
 }
 function getFilteredProducts(
-  recommendCode: number,
+  codeList: number[],
   offset = 0,
   limit = 10,
   sort: "priorityScore" | "price" | "productName" = "priorityScore"
 ) {
   const productList = products
-    .filter((prod) => !recommendCode || prod.recommendCode === Number(recommendCode))
+    .filter((prod) => codeList.includes(0) || codeList.includes(prod.recommendCode))
     .sort((a, b) => (sort === "productName" ? (a[sort] > b[sort] ? 1 : -1) : b[sort] - a[sort]));
   const filtered = productList.slice(offset * limit, (offset + 1) * limit);
   const nextOffset = offset + 1;

@@ -33,7 +33,7 @@
   }
 }
 .scroll-footer {
-  padding: 32px 0;
+  padding: 16px 0 24px;
   display: flex;
   justify-content: center;
   gap: 8px;
@@ -48,7 +48,4 @@
   > .scroll-loader:last-child {
     background-color: var(--gray-400);
   }
-}
-.scroll-footer.none {
-  display: none;
 }

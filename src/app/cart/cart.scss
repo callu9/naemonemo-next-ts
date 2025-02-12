@@ -1,0 +1,9 @@
+.cart-empty {
+  height: 200px;
+  align-items: center;
+}
+.recommend-area {
+  > .recommend-area-header {
+    padding: 20px 20px 10px;
+  }
+}

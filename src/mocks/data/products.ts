@@ -1076,7 +1076,7 @@ export const products = [
   },
   {
     productNo: 1796312,
-    productName: "[29CM 단독] TC4-JP01 필버그 다운베스트 (네이비)",
+    productName: "TC4-JP01 필버그 다운베스트 (네이비)",
     price: 157000,
     priorityScore: 820,
     availableCoupon: true,
@@ -1718,7 +1718,7 @@ export const products = [
   },
   {
     productNo: 2182230,
-    productName: "[5차재입고 / 29CM단독] 몽냥이 인형 키링",
+    productName: "[5차재입고] 몽냥이 인형 키링",
     price: 42000,
     imageUrl: "https://img.29cm.co.kr/item/202308/11ee402281a5180cacc569ae88fc7159.jpg?width=400",
     priorityScore: 480,

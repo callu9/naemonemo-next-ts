@@ -27,7 +27,15 @@ export default function ProductItem({
       <Container className="product-info-area" display="flex" justify="sides" align="upper" gap={8}>
         <Container className="product-info" align="sides" gap={8}>
           <Text className="product-name">{productName}</Text>
-          <Text usage="lable">{new Intl.NumberFormat("ko-KR").format(price)}원</Text>
+          <Container className="product-price" display="flex" justify="left" gap={4}>
+            {/* {availableCoupon && <Text usage='lable' fontColor='negative'>{discountRate}%</Text>} */}
+            {availableCoupon && (
+              <Text usage="lable" fontColor="negative">
+                10%
+              </Text>
+            )}
+            <Text usage="lable">{new Intl.NumberFormat("ko-KR").format(price)}원</Text>
+          </Container>
         </Container>
         <button className="icon-wrapper">
           <IconBagEmpty width="24" height="24" />

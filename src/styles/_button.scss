@@ -56,10 +56,10 @@ $button-color-list: (
     "border": "none",
     "text": "invert",
   ),
-  "disabled": (
-    "surface": "tertiary",
-    "border": "none",
-    "text": "tertiary",
+  "tertiary": (
+    "surface": "secondary",
+    "border": "hover",
+    "text": "secondary",
   ),
 );
 @each $styleNm, $styles in $button-color-list {
@@ -72,5 +72,12 @@ $button-color-list: (
         }
       }
     }
+  }
+}
+button:disabled {
+  @extend .surface-tertiary;
+  @extend .text-tertiary;
+  svg {
+    @extend .icon-tertiary;
   }
 }

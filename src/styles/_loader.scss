@@ -3,9 +3,6 @@
     left: 0;
   }
 }
-html:has(.loader.dimmed) {
-  overflow: hidden;
-}
 .loader {
   position: fixed;
   inset: 0;
