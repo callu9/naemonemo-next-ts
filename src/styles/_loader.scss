@@ -3,10 +3,14 @@
     left: 0;
   }
 }
+html:has(.loader.dimmed) {
+  overflow: hidden;
+}
 .loader {
   position: fixed;
   inset: 0;
   z-index: 5;
+  overflow: hidden;
 }
 .loader.dimmed {
   align-items: center;

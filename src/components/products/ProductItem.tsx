@@ -4,9 +4,20 @@ import IconBagEmpty from "@/assets/icon/toggledIconButton_false.svg";
 import { Container } from "@/atom/Container";
 import { Text } from "@/atom/Text";
 
-export default function ProductItem({ imageUrl, availableCoupon, productName, price }: Product) {
+export default function ProductItem({
+  productNo,
+  imageUrl,
+  availableCoupon,
+  productName,
+  price,
+}: Product) {
   return (
-    <Container className="recommend-product-list-item" align="upper" gap={24}>
+    <Container
+      className="recommend-product-list-item"
+      align="upper"
+      gap={24}
+      id={`product-${productNo}`}
+    >
       <div className="img-wrapper">
         {imageUrl ? <img src={imageUrl} alt="상품 이미지" /> : <div className="thumbnail" />}
         {availableCoupon && (

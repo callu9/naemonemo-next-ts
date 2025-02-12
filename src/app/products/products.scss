@@ -2,15 +2,11 @@
   grid-template-columns: repeat(2, auto);
   > .recommend-product-list-item {
     align-self: flex-start;
-    max-width: 200px;
+    width: 200px;
     > .img-wrapper {
       width: inherit;
       aspect-ratio: 1;
       position: relative;
-      > .thumbnail {
-        width: 100%;
-        height: 100%;
-      }
       > .coupon-available {
         position: absolute;
         bottom: 0;
@@ -35,4 +31,24 @@
       }
     }
   }
+}
+.scroll-footer {
+  padding: 32px 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  > .scroll-loader {
+    width: 16px;
+    height: 16px;
+    background-color: var(--gray-300);
+  }
+  > .scroll-loader:first-child {
+    background-color: var(--gray-200);
+  }
+  > .scroll-loader:last-child {
+    background-color: var(--gray-400);
+  }
+}
+.scroll-footer.none {
+  display: none;
 }
