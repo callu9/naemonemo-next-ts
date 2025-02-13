@@ -12,7 +12,7 @@ export default async function Home() {
   const gateList = await getGateList();
   const feedList = await getFeedList();
   return (
-    <Container gap={48}>
+    <Container className="home" gap={48}>
       <Slides bannerList={slideList} />
       <Gates gateList={gateList} />
       <Feeds feedList={feedList} />

@@ -1,4 +1,6 @@
 .cart {
+  min-height: 100vh;
+  position: relative;
   > .cart-empty {
     height: 200px;
     align-items: center;
@@ -55,4 +57,30 @@
       padding: 20px 20px 10px;
     }
   }
+}
+.pixid-bottom {
+  position: fixed;
+  bottom: 0;
+  .cart-pixid-bottom {
+    box-shadow: 0 0 20px var(--gray-700);
+    > .price-detail {
+      width: 400px;
+      padding: 12px 16px;
+    }
+    > .price-btn {
+      width: 400px;
+      padding: 8px 16px;
+    }
+  }
+}
+.pixid-bottom.dimmed {
+  z-index: 5;
+  inset: 0;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: rgba($color: #000000, $alpha: 0.3);
+}
+body:has(.pixid-bottom.dimmed) {
+  overflow: hidden;
 }
