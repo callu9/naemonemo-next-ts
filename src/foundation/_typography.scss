@@ -3,7 +3,7 @@
   font-family: "Pretendard#{$weight}";
   font-size: #{$fontSize}px;
   line-height: 130%;
-  letter-spacing: 0%;
+  letter-spacing: 0;
   @media (width < 800px) {
     font-size: #{$fontSizeMobile}px;
   }

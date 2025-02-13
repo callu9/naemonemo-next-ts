@@ -8,6 +8,7 @@ import Logo from "../../assets/icon/logo.svg";
 import { useRouter, usePathname } from "next/navigation";
 import { Icon } from "@/atom/Icon";
 import { useEffect, useState } from "react";
+import { getCartItemCount } from "@/app/api/cart/route";
 
 export default function Header() {
   const pathname = usePathname();
@@ -46,9 +47,7 @@ function MainHeader() {
         </Link>
       </li>
       <li>
-        <Link href="/cart">
-          <IconBag width="24" height="24" />
-        </Link>
+        <IconCart />
       </li>
     </ul>
   );
@@ -68,9 +67,7 @@ function ProductsHeader() {
         </Text>
       </li>
       <li>
-        <Link href="/cart">
-          <IconBag width="24" height="24" />
-        </Link>
+        <IconCart />
       </li>
     </ul>
   );
@@ -93,5 +90,25 @@ function CartHeader() {
         <Icon iconNm="chevronRight" iconColor="invert" />
       </li>
     </ul>
+  );
+}
+function IconCart() {
+  const [count, setCount] = useState<number>(0);
+  async function getCount() {
+    const result = await getCartItemCount();
+    setCount(Number(result));
+  }
+  useEffect(() => {
+    getCount();
+  }, []);
+  return (
+    <Link href="/cart">
+      <div className="icon-wrapper">
+        <IconBag width="24" height="24" />
+        <div className="cart-item-count display-flex surface-warning radius-circle text-invert lable-small">
+          {count}
+        </div>
+      </div>
+    </Link>
   );
 }

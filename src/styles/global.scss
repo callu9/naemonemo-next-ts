@@ -258,6 +258,14 @@ iframe {
 }
 .icon-wrapper {
   background-color: transparent;
+  position: relative;
+  > .cart-item-count {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 16px;
+    right: -8px;
+  }
 }
 .icon-rotate-90 {
   transform: rotate(90deg);
