@@ -1,6 +1,6 @@
 "use client";
 
-import { addCartItem, deleteCartItem, getCartItemAddable } from "@/app/api/cart/route";
+import { addCartItem, deleteCartItems, getCartItemAddable } from "@/app/api/cart/route";
 import { Product } from "@/app/api/products/route";
 import IconBag from "@/assets/icon/toggledIconButton_true.svg";
 import IconBagEmpty from "@/assets/icon/toggledIconButton_false.svg";
@@ -32,7 +32,7 @@ export default function ProductItem({
     setAddable(false);
   }
   async function deleteItemfromCart() {
-    const res = await deleteCartItem(productNo);
+    const res = await deleteCartItems([productNo]);
     console.log(res.message);
     setAddable(true);
   }
@@ -52,7 +52,7 @@ export default function ProductItem({
       id={`product-${productNo}`}
     >
       <div className="img-wrapper">
-        {imageUrl ? <img src={imageUrl} alt="상품 이미지" /> : <div className="thumbnail" />}
+        {imageUrl && <img src={imageUrl} alt="상품 이미지" />}
         {availableCoupon && (
           <div className="coupon-available display-flex body-extra-small button-invert">쿠폰</div>
         )}
@@ -73,10 +73,10 @@ export default function ProductItem({
           </Container>
         </Container>
         <button className="icon-wrapper">
-          {addable ? (
-            <IconBagEmpty width="24" height="24" onClick={addItemToCart} />
-          ) : (
+          {!addable ? (
             <IconBag width="24" height="24" onClick={deleteItemfromCart} />
+          ) : (
+            <IconBagEmpty width="24" height="24" onClick={addItemToCart} />
           )}
         </button>
       </Container>

@@ -4,7 +4,7 @@ import "../styles/global.scss";
 import Header from "@/components/common/Header";
 
 export const metadata: Metadata = {
-  title: "내모네모 ",
+  title: "내모네모",
   description: "내 모든 네모 속 취향 : 내모네모 셀렉트샵",
   icons: { icon: Favicon.src },
 };

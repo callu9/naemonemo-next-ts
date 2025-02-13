@@ -68,9 +68,12 @@ export async function PUT(req: NextRequest) {
   });
 }
 export async function DELETE(req: NextRequest) {
-  const params = req.nextUrl.searchParams;
-  const productNo = Number(params.get("productNo"));
-  deleteProduct(Number(productNo));
+  const searchParams = req.nextUrl.searchParams;
+  const productNoList = [];
+  for (const [keyNm, value] of searchParams.entries()) {
+    if (keyNm === "productNo") productNoList.push(Number(value));
+  }
+  deleteProduct(productNoList);
   return new Response(JSON.stringify({ message: "장바구니에서 상품을 뺐어요" }), {
     status: 200,
     headers: { "Content-Type": "application/json" },
@@ -101,10 +104,11 @@ export async function addCartItem(product: Product, count: number) {
   const data = await res.json();
   return data;
 }
-export async function deleteCartItem(productNo: number) {
-  const res = await fetch(`http://localhost:3000/api/cart?productNo=${productNo}`, {
-    method: "DELETE",
-  });
+export async function deleteCartItems(productNoList: number[]) {
+  const URL = "http://localhost:3000/api/cart";
+  const params = new URLSearchParams();
+  productNoList.map((productNo) => params.append("productNo", String(productNo)));
+  const res = await fetch(`${URL}?${params}`, { method: "DELETE" });
   const data = await res.json();
   return data;
 }
@@ -115,7 +119,6 @@ function updateCart(product: Product, count = 1) {
   if (idx < 0) cartList.push({ ...product, count } as CartItem);
   else cartList[idx].count = count;
 }
-function deleteProduct(productNo: number) {
-  const idx = cartList.findIndex((cartItem) => cartItem.productNo === productNo);
-  if (idx >= 0) cartList = [...cartList.slice(0, idx), ...cartList.slice(idx + 1)];
+function deleteProduct(productNoList: number[]) {
+  cartList = cartList.filter((item) => !productNoList.includes(item.productNo));
 }
