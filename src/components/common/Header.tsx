@@ -1,39 +1,38 @@
 "use client";
 
+import { cartList } from "@/app/api/cart/route";
 import { Container } from "@/atom/Container";
+import { Icon } from "@/atom/Icon";
 import { Text } from "@/atom/Text";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import IconBag from "../../assets/icon/ic-bag.svg";
 import Logo from "../../assets/icon/logo.svg";
-import { useRouter, usePathname } from "next/navigation";
-import { Icon } from "@/atom/Icon";
-import { useEffect, useState } from "react";
-import { getCartItemCount } from "@/app/api/cart/route";
 
-export default function Header() {
-  const pathname = usePathname();
-  const [headerType, setHeaderType] = useState<string>("home");
+// export default function Header() {
+//   const pathname = usePathname();
+//   const [headerType, setHeaderType] = useState<string>("home");
 
-  useEffect(() => {
-    const newType = pathname.includes("cart")
-      ? "cart"
-      : pathname.includes("products")
-      ? "products"
-      : "home";
-    if (newType !== headerType) setHeaderType(newType);
-  }, [pathname]);
+//   useEffect(() => {
+//     const newType = pathname.includes("cart")
+//       ? "cart"
+//       : pathname.includes("products")
+//       ? "products"
+//       : "home";
+//     if (newType !== headerType) setHeaderType(newType);
+//   }, [pathname]);
 
-  switch (headerType) {
-    case "cart":
-      return <CartHeader />;
-    case "products":
-      return <ProductsHeader />;
-    case "home":
-    default:
-      return <MainHeader />;
-  }
-}
-function MainHeader() {
+//   switch (headerType) {
+//     case "products":
+//       return <></>;
+//     case "cart":
+//       return <CartHeader />;
+//     case "home":
+//     default:
+//       return <MainHeader />;
+//   }
+// }
+export function MainHeader() {
   return (
     <ul className="header-nav display-flex justify-sides">
       <li>
@@ -52,7 +51,7 @@ function MainHeader() {
     </ul>
   );
 }
-function ProductsHeader() {
+export function ProductsHeader() {
   const router = useRouter();
   return (
     <ul className="header-nav display-flex justify-sides">
@@ -72,7 +71,7 @@ function ProductsHeader() {
     </ul>
   );
 }
-function CartHeader() {
+export function CartHeader() {
   const router = useRouter();
   return (
     <ul className="header-nav display-flex justify-sides">
@@ -92,21 +91,13 @@ function CartHeader() {
     </ul>
   );
 }
-function IconCart() {
-  const [count, setCount] = useState<number>(0);
-  async function getCount() {
-    const result = await getCartItemCount();
-    setCount(Number(result));
-  }
-  useEffect(() => {
-    getCount();
-  }, []);
+export function IconCart() {
   return (
     <Link href="/cart">
       <div className="icon-wrapper">
         <IconBag width="24" height="24" />
         <div className="cart-item-count display-flex surface-warning radius-circle text-invert lable-small">
-          {count}
+          {cartList.length}
         </div>
       </div>
     </Link>

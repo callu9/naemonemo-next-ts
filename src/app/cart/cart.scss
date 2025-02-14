@@ -1,5 +1,5 @@
 .cart {
-  min-height: 100vh;
+  min-height: calc(100vh - 52px);
   position: relative;
   > .cart-empty {
     height: 200px;
@@ -52,10 +52,11 @@
       }
     }
   }
-  > .recommend-area {
-    > .recommend-area-header {
-      padding: 20px 20px 10px;
-    }
+  > .recommend-area:not(:has(.recommend-product-list)) {
+    min-height: 300px;
+  }
+  > .recommend-area > .recommend-area-header {
+    padding: 20px 20px 10px;
   }
 }
 .pixid-bottom {

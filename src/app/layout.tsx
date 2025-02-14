@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Favicon from "./favicon.ico";
 import "../styles/global.scss";
-import Header from "@/components/common/Header";
+import Favicon from "./favicon.ico";
 
 export const metadata: Metadata = {
   title: "내모네모",
@@ -17,10 +16,7 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <div className="dimmed">
-          <section className="container-wrapper">
-            <Header />
-            {children}
-          </section>
+          <section className="container-wrapper">{children}</section>
         </div>
       </body>
     </html>

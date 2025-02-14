@@ -10,13 +10,15 @@ export default function RecommendArea({
   onUpdate: () => void;
 }) {
   return (
-    <Container surface="primary" justify="stretch" className="recommend-area">
+    <Container surface="primary" justify="left" align="upper" className="recommend-area">
       <div className="recommend-area-header">
         <Text fontStyle="large" weight="bold">
           {codeList.length > 0 ? "담으신 상품과 비슷한" : "고객님을 위한"} 추천 상품
         </Text>
       </div>
-      {codeList.length > 0 && <RecommendList codeList={codeList} onUpdate={onUpdate} />}
+      <Container surface="primary" align="upper" className="recommend-product-area">
+        {codeList.length > 0 && <RecommendList codeList={codeList} onUpdate={onUpdate} />}
+      </Container>
     </Container>
   );
 }

@@ -13,7 +13,7 @@ export default function ProductItem({
   onUpdate,
 }: {
   product: Product;
-  onUpdate: () => void;
+  onUpdate?: () => void;
 }) {
   const [addable, setAddable] = useState<boolean>(false);
 
@@ -21,13 +21,13 @@ export default function ProductItem({
     const res = await addCartItem(product, 1);
     console.log(res.message);
     setAddable(false);
-    onUpdate();
+    if (onUpdate) onUpdate();
   }
   async function deleteItemfromCart() {
     const res = await deleteCartItems([product.productNo]);
     console.log(res.message);
     setAddable(true);
-    onUpdate();
+    if (onUpdate) onUpdate();
   }
   useEffect(() => {
     if (product.addable !== undefined) setAddable(product.addable);

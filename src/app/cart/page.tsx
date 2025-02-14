@@ -1,6 +1,7 @@
 "use client";
 
 import { Container } from "@/atom/Container";
+import { CartHeader } from "@/components/common/Header";
 import CartList from "@/template/cart/CartList";
 import PixidBottom from "@/template/cart/PixidBottom";
 import RecommendArea from "@/template/cart/RecommendArea";
@@ -16,16 +17,35 @@ export default function Cart() {
     getList();
   }, []);
 
+  useEffect(() => {
+    getCodeList();
+  }, [cartList]);
+
   async function getList() {
+    setCodeList([]);
     const list = await getCartItemList();
     setCartList(list);
-    setCodeList(list.length > 0 ? list.map((item: CartItem) => item.recommendCode) : [0]);
+  }
+
+  function getCodeList() {
+    setCodeList(cartList.length > 0 ? cartList.map((item: CartItem) => item.recommendCode) : [0]);
   }
   return (
-    <Container className="cart" surface="tertiary" justify="stretch" align="upper" gap={10}>
-      <CartList cartList={cartList} onChange={getList} />
-      <RecommendArea codeList={codeList} onUpdate={getList} />
-      <PixidBottom cartList={cartList} />
-    </Container>
+    <>
+      <CartHeader />
+      <Container
+        className="cart"
+        surface="tertiary"
+        display="flex"
+        direction="column"
+        justify="left"
+        align="stretch"
+        gap={10}
+      >
+        <CartList cartList={cartList} onChange={getList} />
+        <RecommendArea codeList={codeList} onUpdate={getList} />
+        <PixidBottom cartList={cartList} />
+      </Container>
+    </>
   );
 }

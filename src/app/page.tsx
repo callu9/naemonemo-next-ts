@@ -1,4 +1,5 @@
 import { Container } from "@/atom/Container";
+import { MainHeader } from "@/components/common/Header";
 import Feeds from "@/template/Feeds";
 import Gates from "@/template/Gates";
 import Slides from "@/template/Slides";
@@ -12,10 +13,13 @@ export default async function Home() {
   const gateList = await getGateList();
   const feedList = await getFeedList();
   return (
-    <Container className="home" gap={48}>
-      <Slides bannerList={slideList} />
-      <Gates gateList={gateList} />
-      <Feeds feedList={feedList} />
-    </Container>
+    <>
+      <MainHeader />
+      <Container className="home" gap={48}>
+        <Slides bannerList={slideList} />
+        <Gates gateList={gateList} />
+        <Feeds feedList={feedList} />
+      </Container>
+    </>
   );
 }

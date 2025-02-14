@@ -17,7 +17,7 @@ export default function RecommendList({
   onUpdate,
 }: {
   codeList?: number[];
-  onUpdate: () => void;
+  onUpdate?: () => void;
 }) {
   const targetRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -60,7 +60,7 @@ export default function RecommendList({
     <>
       <Container className="recommend-product-list">
         {result.productList.map((prod: Product) => (
-          <ProductItem key={prod.productNo} onUpdate={onUpdate} product={prod} />
+          <ProductItem key={prod.productNo} product={prod} onUpdate={onUpdate} />
         ))}
       </Container>
       {result.next !== undefined && (
