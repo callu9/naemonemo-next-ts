@@ -11,5 +11,5 @@ export default function Products() {
     const strRecommendCode = params.get("recommendCode");
     if (strRecommendCode) setCodeList([Number(strRecommendCode)]);
   }, [params]);
-  return <RecommendList codeList={codeList} />;
+  return <RecommendList codeList={codeList} onUpdate={() => {}} />;
 }

@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { Product } from "../products/route";
 
-let cartList = [
+export let cartList = [
   {
     productNo: 2155131,
     productName: "WOMAN GNRL 케이블 풀오버 [IVORY] / WBC3L05502",
@@ -41,19 +41,12 @@ export type CartItem = (typeof cartList)[0];
 export async function GET(req: NextRequest) {
   const query = req.nextUrl.searchParams;
   const type = query.get("type");
-  const productNo = query.get("productNo");
   if (type === "count")
     return new Response(JSON.stringify(cartList.length), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
-  else if (productNo) {
-    const addable = cartList.findIndex((item) => item.productNo === Number(productNo)) < 0;
-    return new Response(JSON.stringify(addable), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
-  } else
+  else
     return new Response(JSON.stringify(cartList), {
       status: 200,
       headers: { "Content-Type": "application/json" },
@@ -91,11 +84,11 @@ export async function getCartItemCount() {
   const data = await res.json();
   return data;
 }
-export async function getCartItemAddable(productNo: number) {
-  const res = await fetch(`http://localhost:3000/api/cart?type=addable&productNo=${productNo}`);
-  const data = await res.json();
-  return data;
-}
+// export async function getCartItemAddable(productNo: number) {
+//   const res = await fetch(`http://localhost:3000/api/cart?type=addable&productNo=${productNo}`);
+//   const data = await res.json();
+//   return data;
+// }
 export async function addCartItem(product: Product, count: number) {
   const res = await fetch("http://localhost:3000/api/cart", {
     method: "PUT",

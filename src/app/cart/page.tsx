@@ -2,11 +2,11 @@
 
 import { Container } from "@/atom/Container";
 import CartList from "@/template/cart/CartList";
+import PixidBottom from "@/template/cart/PixidBottom";
 import RecommendArea from "@/template/cart/RecommendArea";
 import { useEffect, useState } from "react";
 import { CartItem, getCartItemList } from "../api/cart/route";
 import "./cart.scss";
-import PixidBottom from "@/template/cart/PixidBottom";
 
 export default function Cart() {
   const [cartList, setCartList] = useState<CartItem[]>([]);
@@ -24,7 +24,7 @@ export default function Cart() {
   return (
     <Container className="cart" surface="tertiary" justify="stretch" align="upper" gap={10}>
       <CartList cartList={cartList} onChange={getList} />
-      {/* <RecommendArea codeList={codeList} /> */}
+      <RecommendArea codeList={codeList} onUpdate={getList} />
       <PixidBottom cartList={cartList} />
     </Container>
   );
