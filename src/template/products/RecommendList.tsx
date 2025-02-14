@@ -1,6 +1,6 @@
 "use client";
 
-import { getProductList, Product, ProductList } from "@/app/api/products/route";
+import { getProductList, Product } from "@/app/api/products/route";
 import { Container } from "@/atom/Container";
 import Loader from "@/components/common/Loader";
 import ProductItem from "@/components/products/ProductItem";
@@ -8,11 +8,17 @@ import { useEffect, useRef, useState } from "react";
 import "./products.scss";
 
 interface RecommendedResultProps {
-  productList: ProductList;
+  productList: Product[];
   offset: number;
   next?: number;
 }
-export default function RecommendList({ codeList }: { codeList?: number[] }) {
+export default function RecommendList({
+  codeList,
+  onUpdate,
+}: {
+  codeList?: number[];
+  onUpdate: () => void;
+}) {
   const targetRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [result, setResult] = useState<RecommendedResultProps>({
@@ -54,7 +60,7 @@ export default function RecommendList({ codeList }: { codeList?: number[] }) {
     <>
       <Container className="recommend-product-list">
         {result.productList.map((prod: Product) => (
-          <ProductItem key={prod.productNo} {...prod} />
+          <ProductItem key={prod.productNo} onUpdate={onUpdate} product={prod} />
         ))}
       </Container>
       {result.next !== undefined && (

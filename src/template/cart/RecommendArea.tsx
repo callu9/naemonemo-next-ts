@@ -2,7 +2,13 @@ import { Container } from "@/atom/Container";
 import { Text } from "@/atom/Text";
 import RecommendList from "../products/RecommendList";
 
-export default function RecommendArea({ codeList }: { codeList: number[] }) {
+export default function RecommendArea({
+  codeList,
+  onUpdate,
+}: {
+  codeList: number[];
+  onUpdate: () => void;
+}) {
   return (
     <Container surface="primary" justify="stretch" className="recommend-area">
       <div className="recommend-area-header">
@@ -10,7 +16,7 @@ export default function RecommendArea({ codeList }: { codeList: number[] }) {
           {codeList.length > 0 ? "담으신 상품과 비슷한" : "고객님을 위한"} 추천 상품
         </Text>
       </div>
-      {codeList.length > 0 && <RecommendList codeList={codeList} />}
+      {codeList.length > 0 && <RecommendList codeList={codeList} onUpdate={onUpdate} />}
     </Container>
   );
 }
