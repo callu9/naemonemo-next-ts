@@ -17,18 +17,10 @@ export default function Cart() {
     getList();
   }, []);
 
-  useEffect(() => {
-    getCodeList();
-  }, [cartList]);
-
   async function getList() {
-    setCodeList([]);
     const list = await getCartItemList();
     setCartList(list);
-  }
-
-  function getCodeList() {
-    setCodeList(cartList.length > 0 ? cartList.map((item: CartItem) => item.recommendCode) : [0]);
+    if (codeList.length === 0) setCodeList(list.map((item: CartItem) => item.recommendCode) || [0]);
   }
   return (
     <>
