@@ -1,37 +1,14 @@
 "use client";
 
-import { cartList } from "@/app/api/cart/route";
 import { Container } from "@/atom/Container";
 import { Icon } from "@/atom/Icon";
 import { Text } from "@/atom/Text";
+import useCartStore, { cartStoreType } from "@/store/cart";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import IconBag from "../../assets/icon/ic-bag.svg";
 import Logo from "../../assets/icon/logo.svg";
 
-// export default function Header() {
-//   const pathname = usePathname();
-//   const [headerType, setHeaderType] = useState<string>("home");
-
-//   useEffect(() => {
-//     const newType = pathname.includes("cart")
-//       ? "cart"
-//       : pathname.includes("products")
-//       ? "products"
-//       : "home";
-//     if (newType !== headerType) setHeaderType(newType);
-//   }, [pathname]);
-
-//   switch (headerType) {
-//     case "products":
-//       return <></>;
-//     case "cart":
-//       return <CartHeader />;
-//     case "home":
-//     default:
-//       return <MainHeader />;
-//   }
-// }
 export function MainHeader() {
   return (
     <ul className="header-nav display-flex justify-sides">
@@ -92,12 +69,13 @@ export function CartHeader() {
   );
 }
 export function IconCart() {
+  const { itemCount } = useCartStore() as cartStoreType;
   return (
     <Link href="/cart">
       <div className="icon-wrapper">
         <IconBag width="24" height="24" />
         <div className="cart-item-count display-flex surface-warning radius-circle text-invert lable-small">
-          {cartList.length}
+          {itemCount}
         </div>
       </div>
     </Link>

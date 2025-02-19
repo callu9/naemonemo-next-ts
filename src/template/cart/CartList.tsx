@@ -1,26 +1,18 @@
 "use client";
 
-import { addCartItem, deleteCartItems, CartItem as Item } from "@/app/api/cart/route";
+import { CartItem as Item } from "@/app/api/cart/route";
 import { Container } from "@/atom/Container";
 import { Icon } from "@/atom/Icon";
 import { Text } from "@/atom/Text";
 import CartItem from "@/components/cart/CartItem";
 import { Button } from "@/components/common/Button";
+import useCartStore, { cartStoreType } from "@/store/cart";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function CartList({
-  cartList,
-  onChange,
-}: {
-  cartList: Item[];
-  onChange: () => void;
-}) {
+export default function CartList({ cartList }: { cartList: Item[] }) {
+  const { removeFromCart } = useCartStore() as cartStoreType;
   const [selected, setSelected] = useState<number[]>([]);
-
-  // useEffect(() => {
-  //   onChange();
-  // }, [selected]);
 
   function onSelectAll() {
     if (selected.length === cartList.length) setSelected([]);
@@ -31,14 +23,8 @@ export default function CartList({
     if (idx < 0) setSelected([...selected, productNo]);
     else setSelected([...selected.slice(0, idx), ...selected.slice(idx + 1)]);
   }
-  async function onUpdate(product: Item, count: number) {
-    await addCartItem(product, count);
-    onChange();
-  }
-  async function onDelete(productNoList: number[]) {
-    await deleteCartItems(productNoList);
-    setSelected(selected.filter((productNo) => !productNoList.includes(productNo)));
-    onChange();
+  async function onDeleteSelected() {
+    removeFromCart(selected);
   }
 
   return cartList.length === 0 ? (
@@ -63,7 +49,7 @@ export default function CartList({
           </button>
           <Text>전체 선택 (0/{cartList.length})</Text>
         </Container>
-        <button className="delete-cart-item button-small" onClick={() => onDelete(selected)}>
+        <button className="delete-cart-item button-small" onClick={onDeleteSelected}>
           선택 삭제
         </button>
       </Container>
@@ -73,8 +59,6 @@ export default function CartList({
           item={item}
           checked={selected.indexOf(item.productNo) >= 0}
           onSelect={onSelect}
-          onDelete={onDelete}
-          onUpdate={onUpdate}
         />
       ))}
     </Container>

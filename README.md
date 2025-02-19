@@ -13,7 +13,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## Updates 📝
 
 - 250124 프로젝트 생성
-- 
+- 250206 App Router 사용 변경
+- 250219 Zustand 도입
 
 ## Folder Structure 📁
 
@@ -27,18 +28,20 @@ src/app/
 
 +-- foundation/ (definitions of design attributes and values)
 |   +-- layout.ts : align, padding, margin, corner radius
-|   +-- color.ts : color palette, color theme (surface/text/border/icon/divider)
+|   +-- color.ts : color palette, color theme (surface/text/bcart/icon/divider)
 |   +-- icon.ts : icon size, icon name
 |   +-- spacing.ts : spacing sizes (px)
 |   +-- typography.ts : font size, font weight, line height
 
 +-- atom/ (default & smallest UI Component)
 |   +-- Container.tsx (body container for aligning with grid or flex)
-|   +-- Text.tsx (Display, Heading, Title, Body, Lable)
-|   +-- Input.tsx (Text Field, Dropdown, Radio, Checkbox...)
 |   +-- Icon.tsx
+|   +-- ImageBox.tsx
+|   +-- Text.tsx
 
 +-- component/ (reusable UI Components having atoms combined)
+|   +-- SlideItem.tsx
+|   +-- ...
 |   +-- common/
 |   |   +-- Button.tsx
 |   |   +-- Header.tsx
@@ -49,26 +52,24 @@ src/app/
 |   +-- product/
 |   |   +-- ProductItem.tsx
 |   |   +-- OptionSelector.tsx
-|   +-- order/
+|   +-- cart/
 |   |   +-- OrderProductItem.tsx
 |   |   +-- OrderButton.tsx
 
 +-- template/ (UI Componets for specific context)
-|   +-- main/
-|   |   +-- CardSlider.tsx
-|   |   +-- GateList.tsx
-|   |   +-- ProductListArea.tsx
+|   +-- Slides.tsx
+|   +-- ...
 |   +-- product/
-|   |   +-- ProductList.tsx
-|   |   +-- ProductInfoCard.tsx
-|   |   +-- ProductDetail.tsx
-|   +-- order/
-|   |   +-- OrderProductList.tsx
+|   |   +-- RecommendList.tsx
+|   +-- cart/
+|   |   +-- CartList.tsx
+|   |   +-- RecommendArea.tsx
+|   |   +-- PixidBottom.tsx
 
 +-- app/(route)/
 |   +-- product/
 |   |   +-- index.tsx
-|   +-- order/
+|   +-- cart/
 |   |   +-- index.tsx
 |   +-- index.tsx
 .

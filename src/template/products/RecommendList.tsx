@@ -12,13 +12,7 @@ interface RecommendedResultProps {
   offset: number;
   next?: number;
 }
-export default function RecommendList({
-  codeList,
-  onUpdate,
-}: {
-  codeList?: number[];
-  onUpdate?: () => void;
-}) {
+export default function RecommendList({ codeList }: { codeList?: number[] }) {
   const targetRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [result, setResult] = useState<RecommendedResultProps>({
@@ -60,7 +54,7 @@ export default function RecommendList({
     <>
       <Container className="recommend-product-list">
         {result.productList.map((prod: Product) => (
-          <ProductItem key={prod.productNo} product={prod} onUpdate={onUpdate} />
+          <ProductItem key={prod.productNo} product={prod} />
         ))}
       </Container>
       {result.next !== undefined && (

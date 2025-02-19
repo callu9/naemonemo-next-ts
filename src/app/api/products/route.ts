@@ -1,6 +1,5 @@
 import { products } from "@/mocks";
 import { NextRequest } from "next/server";
-import { cartList } from "../cart/route";
 
 export type Product = {
   productNo: number;
@@ -10,7 +9,6 @@ export type Product = {
   priorityScore: number;
   recommendCode: number;
   availableCoupon?: boolean;
-  addable?: boolean;
 };
 
 export async function GET(req: NextRequest) {
@@ -45,11 +43,7 @@ function getFilteredProducts(
   const productList = products
     .filter((prod) => codeList.includes(0) || codeList.includes(prod.recommendCode))
     .sort((a, b) => (sort === "productName" ? (a[sort] > b[sort] ? 1 : -1) : b[sort] - a[sort]));
-  const isAddable = (item: Product) =>
-    cartList.findIndex((el) => el.productNo === item.productNo) < 0;
-  const filtered = productList
-    .slice(offset * limit, (offset + 1) * limit)
-    .map((item) => ({ ...item, addable: isAddable(item) }));
+  const filtered = productList.slice(offset * limit, (offset + 1) * limit);
   const nextOffset = offset + 1;
   const next = productList.length > (offset + 1) * limit ? nextOffset + 1 : undefined;
   return { data: filtered, offset: nextOffset, next };

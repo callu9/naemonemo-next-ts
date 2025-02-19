@@ -1,5 +1,4 @@
 import { feeds } from "@/mocks";
-import { cartList } from "../cart/route";
 
 export type Feed = {
   feedNo: number;
@@ -17,13 +16,11 @@ export type RelatedProduct = {
   imageUrl: string;
   availableCoupon: boolean;
   priorityScore: number;
-  addable?: boolean;
 };
 
 export async function GET() {
   const resultList = feeds.map((feed) => {
     const relatedProducts = feed.relatedProducts?.map((item) => ({
-      addable: cartList.findIndex((cartItem) => cartItem.productNo === item.productNo) < 0,
       ...item,
     }));
     return { ...feed, relatedProducts };

@@ -3,20 +3,18 @@ import { Container } from "@/atom/Container";
 import { Icon } from "@/atom/Icon";
 import { Text } from "@/atom/Text";
 import { Button } from "../common/Button";
+import useCartStore, { cartStoreType } from "@/store/cart";
 
 export default function CartItem({
   item,
   checked = false,
   onSelect,
-  onDelete,
-  onUpdate,
 }: {
   item: ItemProps;
   checked: boolean;
   onSelect: (productNo: number) => void;
-  onDelete: (productNoList: number[]) => void;
-  onUpdate: (product: ItemProps, count: number) => void;
 }) {
+  const { updateCartItemCount, removeFromCart } = useCartStore() as cartStoreType;
   const strPriceWon = (price: number) =>
     `${new Intl.NumberFormat("ko-KR").format(item.availableCoupon ? price * 0.9 : price)}원`;
   return (
@@ -31,7 +29,7 @@ export default function CartItem({
             )}
           </button>
           <Text weight="semibold">{item.productName}</Text>
-          <button className="icon-wrapper" onClick={() => onDelete([item.productNo])}>
+          <button className="icon-wrapper" onClick={() => removeFromCart([item.productNo])}>
             <Icon iconNm="close" iconSize={24} iconColor="tertiary" />
           </button>
         </Container>
@@ -57,7 +55,7 @@ export default function CartItem({
           <Container display="flex" align="center" gap={6} className="adjust-count button-outlined">
             <button
               className="icon-wrapper"
-              onClick={() => item.count > 1 && onUpdate(item, item.count - 1)}
+              onClick={() => item.count > 1 && updateCartItemCount(item, item.count - 1)}
               disabled={item.count <= 1}
             >
               <Icon iconNm="remove" iconSize={18} />
@@ -65,7 +63,7 @@ export default function CartItem({
             <Text fontStyle="small">{item.count}</Text>
             <button
               className="icon-wrapper"
-              onClick={() => item.count < 999 && onUpdate(item, item.count + 1)}
+              onClick={() => item.count < 999 && updateCartItemCount(item, item.count + 1)}
               disabled={item.count >= 999}
             >
               <Icon iconNm="add" iconSize={18} />

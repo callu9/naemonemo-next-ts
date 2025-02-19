@@ -2,13 +2,7 @@ import { Container } from "@/atom/Container";
 import { Text } from "@/atom/Text";
 import RecommendList from "../products/RecommendList";
 
-export default function RecommendArea({
-  codeList,
-  onUpdate,
-}: {
-  codeList: number[];
-  onUpdate: () => void;
-}) {
+export default function RecommendArea({ codeList }: { codeList: number[] }) {
   return (
     <Container surface="primary" justify="left" align="upper" className="recommend-area">
       <div className="recommend-area-header">
@@ -17,7 +11,7 @@ export default function RecommendArea({
         </Text>
       </div>
       <Container surface="primary" align="upper" className="recommend-product-area">
-        {codeList.length > 0 && <RecommendList codeList={codeList} onUpdate={onUpdate} />}
+        {codeList.length > 0 && <RecommendList codeList={codeList} />}
       </Container>
     </Container>
   );

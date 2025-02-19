@@ -55,7 +55,7 @@ export async function GET(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   const { product, count } = await req.json();
   updateCart(product as Product, Number(count));
-  return new Response(JSON.stringify({ message: "장바구니에 상품을 추가했어요" }), {
+  return new Response(JSON.stringify(cartList), {
     status: 200,
     headers: { "Content-Type": "application/json" },
   });
@@ -67,7 +67,7 @@ export async function DELETE(req: NextRequest) {
     if (keyNm === "productNo") productNoList.push(Number(value));
   }
   deleteProduct(productNoList);
-  return new Response(JSON.stringify({ message: "장바구니에서 상품을 뺐어요" }), {
+  return new Response(JSON.stringify(cartList), {
     status: 200,
     headers: { "Content-Type": "application/json" },
   });
@@ -94,6 +94,7 @@ export async function addCartItem(product: Product, count: number) {
     method: "PUT",
     body: JSON.stringify({ product, count }),
   });
+  if (!res.ok) return [];
   const data = await res.json();
   return data;
 }
@@ -102,6 +103,7 @@ export async function deleteCartItems(productNoList: number[]) {
   const params = new URLSearchParams();
   productNoList.map((productNo) => params.append("productNo", String(productNo)));
   const res = await fetch(`${URL}?${params}`, { method: "DELETE" });
+  if (!res.ok) return [];
   const data = await res.json();
   return data;
 }

@@ -1,39 +1,24 @@
 "use client";
 
-import { addCartItem, deleteCartItems } from "@/app/api/cart/route";
 import { RelatedProduct } from "@/app/api/feeds/route";
 import { Product } from "@/app/api/products/route";
 import { Container } from "@/atom/Container";
 import ImageBox from "@/atom/ImageBox";
 import { Text } from "@/atom/Text";
-import { useEffect, useState } from "react";
+import useCartStore, { cartStoreType } from "@/store/cart";
 import ToggleIconEmpty from "../assets/icon/toggledIconButton_false.svg";
 import ToggleIcon from "../assets/icon/toggledIconButton_true.svg";
 
-export default function ProductListItem({
-  product,
-  onUpdate,
-}: {
-  product: RelatedProduct;
-  onUpdate: () => void;
-}) {
-  const [addable, setAddable] = useState<boolean>(true);
+export default function ProductListItem({ product }: { product: RelatedProduct }) {
+  const { cartList, addToCart, removeFromCart } = useCartStore() as cartStoreType;
+  const addable = cartList.findIndex((item) => item.productNo === product.productNo) < 0;
 
-  async function addItemToCart() {
-    const res = await addCartItem(product as Product, 1);
-    console.log(res.message);
-    setAddable(false);
-    onUpdate();
+  function addItemToCart() {
+    addToCart(product as Product);
   }
-  async function deleteItemfromCart() {
-    const res = await deleteCartItems([product.productNo]);
-    console.log(res.message);
-    setAddable(true);
-    onUpdate();
+  function deleteItemfromCart() {
+    removeFromCart([product.productNo]);
   }
-  useEffect(() => {
-    if (product.addable !== undefined) setAddable(product.addable);
-  }, [product.addable]);
 
   return (
     <div className="product-list-item">

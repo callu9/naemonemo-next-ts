@@ -1,37 +1,22 @@
 "use client";
 
-import { addCartItem, deleteCartItems } from "@/app/api/cart/route";
 import { Product } from "@/app/api/products/route";
 import IconBagEmpty from "@/assets/icon/toggledIconButton_false.svg";
 import IconBag from "@/assets/icon/toggledIconButton_true.svg";
 import { Container } from "@/atom/Container";
 import { Text } from "@/atom/Text";
-import { useEffect, useState } from "react";
+import useCartStore, { cartStoreType } from "@/store/cart";
 
-export default function ProductItem({
-  product,
-  onUpdate,
-}: {
-  product: Product;
-  onUpdate?: () => void;
-}) {
-  const [addable, setAddable] = useState<boolean>(false);
+export default function ProductItem({ product }: { product: Product; onUpdate?: () => void }) {
+  const { cartList, addToCart, removeFromCart } = useCartStore() as cartStoreType;
+  const addable = cartList.findIndex((item) => item.productNo === product.productNo) < 0;
 
-  async function addItemToCart() {
-    const res = await addCartItem(product, 1);
-    console.log(res.message);
-    setAddable(false);
-    if (onUpdate) onUpdate();
+  function addItemToCart() {
+    addToCart(product);
   }
-  async function deleteItemfromCart() {
-    const res = await deleteCartItems([product.productNo]);
-    console.log(res.message);
-    setAddable(true);
-    if (onUpdate) onUpdate();
+  function deleteItemfromCart() {
+    removeFromCart([product.productNo]);
   }
-  useEffect(() => {
-    if (product.addable !== undefined) setAddable(product.addable);
-  }, [product.addable]);
 
   return (
     <Container
