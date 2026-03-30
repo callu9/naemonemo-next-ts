@@ -1,0 +1,93 @@
+// ✅ 컴포넌트별 스타일 통합 SCSS 파일
+// 이전에 인라인 스타일로 작성된 CSS를 SCSS 클래스로 변환
+
+// ============================================
+// SlideItem 컴포넌트 스타일
+// ============================================
+
+.slide-item-link {
+	text-decoration: none;
+	display: block;
+}
+
+.slide-list-item {
+	position: relative;
+	overflow: hidden;
+}
+
+.slide-item-image {
+	object-fit: cover;
+}
+
+.slide-item-content {
+	position: relative;
+	z-index: 1;
+}
+
+// ============================================
+// Slides 컴포넌트 스타일
+// ============================================
+
+.slide-list {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.slide-chevron {
+	cursor: pointer;
+	flex-shrink: 0;
+
+	&:active {
+		opacity: 0.8;
+	}
+}
+
+.slide-wrapper {
+	// ✅ 하드웨어 가속화 (layout shift 방지)
+	scroll-behavior: smooth;
+	overflow: hidden;
+	-webkit-overflow-scrolling: touch;
+	will-change: scroll-position;
+
+	// CSS Containment로 성능 최적화
+	contain: layout style paint;
+}
+
+.slide-item-wrapper {
+	// ✅ 각 슬라이드에 flex-shrink: 0 적용 (크기 고정)
+	flex-shrink: 0;
+	width: 100%;
+}
+
+// ============================================
+// FeedItem 컴포넌트 스타일
+// ============================================
+
+.feed-item-image-container {
+	// ✅ 이미지 컨테이너 크기 명확하게 정의 (CLS 방지)
+	width: 100%;
+	height: 250px;
+	position: relative;
+	overflow: hidden;
+
+	// 성능 최적화
+	contain: strict;
+}
+
+// ============================================
+// 공통 성능 최적화 클래스
+// ============================================
+
+// 하드웨어 가속화를 위한 클래스
+.hardware-accelerated {
+	will-change: transform;
+	transform: translateZ(0);
+	-webkit-transform: translateZ(0);
+}
+
+// Layout shift 방지용 컨테이너
+.fixed-aspect-ratio {
+	position: relative;
+	overflow: hidden;
+}
