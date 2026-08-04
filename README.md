@@ -19,8 +19,15 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## Folder Structure 📁
 
 ```
-src/app/
+src/
 
++-- app/ (Next.js App Router)
+|   +-- (route)/
+|   |   +-- cart/
+|   |   +-- products/
+|   +-- api/ (Route Handlers)
+|   +-- layout.tsx
+|   +-- page.tsx
 +-- assets/
 |   +-- font/
 |   +-- icon/ (.svg files for icon)
@@ -66,15 +73,6 @@ src/app/
 |   |   +-- RecommendArea.tsx
 |   |   +-- PixidBottom.tsx
 
-+-- app/(route)/
-|   +-- product/
-|   |   +-- index.tsx
-|   +-- cart/
-|   |   +-- index.tsx
-|   +-- index.tsx
-.
-.
-.
 ```
 
 ## Convention
@@ -123,13 +121,12 @@ src/app/
 
 ## Getting Started 🚀
 
-This project was bootstrapped with [Create React App(CRA)](https://github.com/facebook/create-react-app).
+This project uses [Next.js App Router](https://nextjs.org/docs/app) with TypeScript, React, Sass, and Zustand.
 
 **Node.js 설치 필수**
 
 ```
-npm install npx -g
-npx create-next-app@latest naemonemo-next-ts --typescript
+npm install
 ```
 
 ## Quick Start 🚀
@@ -149,6 +146,6 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can start editing the home page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to optimize the Noto Sans KR font used by the app.
