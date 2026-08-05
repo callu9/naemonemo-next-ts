@@ -1,6 +1,6 @@
 "use client";
 
-import { CartItem as Item } from "@/app/api/cart/route";
+import type { CartItem as Item } from "@/lib/cart";
 import { Container } from "@/atom/Container";
 import { Icon } from "@/atom/Icon";
 import { Text } from "@/atom/Text";

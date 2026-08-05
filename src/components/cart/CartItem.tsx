@@ -1,4 +1,4 @@
-import { CartItem as ItemProps } from "@/app/api/cart/route";
+import type { CartItem as ItemProps } from "@/lib/cart";
 import { Container } from "@/atom/Container";
 import { Icon } from "@/atom/Icon";
 import { Text } from "@/atom/Text";

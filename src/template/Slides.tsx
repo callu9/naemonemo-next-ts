@@ -1,55 +1,45 @@
 "use client";
 
-import { BannerList } from "@/app/api/banner/route";
 import { Container } from "@/atom/Container";
 import { Icon } from "@/atom/Icon";
 import SlideItem from "@/components/SlideItem";
-import { useEffect, useState } from "react";
+import type { BannerList } from "@/lib/catalog";
+import { useCallback, useEffect, useState } from "react";
 
 export default function Slides({ bannerList }: { bannerList: BannerList }) {
-  const [currentIdx, setCurrentIdx] = useState<number>(0);
+  const [currentIdx, setCurrentIdx] = useState(0);
+
+  const onClickChevron = useCallback(
+    (direction: number) => {
+      const nextIndex = (currentIdx + direction + bannerList.length) % bannerList.length;
+      setCurrentIdx(nextIndex);
+      const bannerElement = document.getElementById(`banner-${bannerList[nextIndex].bannerNo}`);
+      document
+        .getElementById("slide-wrapper")
+        ?.scrollTo({ behavior: "smooth", left: bannerElement?.offsetLeft });
+    },
+    [bannerList, currentIdx],
+  );
 
   useEffect(() => {
     const intervalId = setInterval(() => onClickChevron(1), 4000);
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [currentIdx]);
-  useEffect(() => {}, [currentIdx]);
+    return () => clearInterval(intervalId);
+  }, [onClickChevron]);
 
-  function onClickChevron(num: number) {
-    const newIdx = (currentIdx + num + bannerList.length) % bannerList.length;
-    setCurrentIdx(newIdx);
-    const currentBannerNo = bannerList[newIdx].bannerNo;
-    const bannerElement = document.getElementById(`banner-${currentBannerNo}`);
-    document
-      .getElementById("slide-wrapper")
-      ?.scrollTo({ behavior: "smooth", left: bannerElement?.offsetLeft });
-  }
   return (
     <div className="slide-list">
-      <Icon
-        iconNm="chevronLeft"
-        iconColor="invert"
-        iconSize={48}
-        onClick={() => onClickChevron(-1)}
-      />
+      <Icon iconNm="chevronLeft" iconColor="invert" iconSize={48} onClick={() => onClickChevron(-1)} />
       <Container className="slide-wrapper" display="flex" justify="left" id="slide-wrapper">
         {bannerList.map((banner) => (
           <SlideItem key={banner.bannerNo} {...banner} />
         ))}
       </Container>
       <Container className="progress-bar" display="flex" justify="stretch">
-        {new Array(bannerList.length).fill(undefined).map((_, idx) => (
-          <div key={idx} className={idx === currentIdx ? "active" : "inactive"} />
+        {new Array(bannerList.length).fill(undefined).map((_, index) => (
+          <div key={index} className={index === currentIdx ? "active" : "inactive"} />
         ))}
       </Container>
-      <Icon
-        iconNm="chevronRight"
-        iconColor="invert"
-        iconSize={48}
-        onClick={() => onClickChevron(1)}
-      />
+      <Icon iconNm="chevronRight" iconColor="invert" iconSize={48} onClick={() => onClickChevron(1)} />
     </div>
   );
 }

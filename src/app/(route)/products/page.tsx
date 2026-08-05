@@ -3,15 +3,21 @@
 import { ProductsHeader } from "@/components/common/Header";
 import RecommendList from "@/template/products/RecommendList";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useMemo } from "react";
 
 export default function Products() {
-  const params = useSearchParams();
-  const [codeList, setCodeList] = useState<number[] | undefined>();
+  return (
+    <Suspense fallback={null}>
+      <ProductsPage />
+    </Suspense>
+  );
+}
 
-  useEffect(() => {
+function ProductsPage() {
+  const params = useSearchParams();
+  const codeList = useMemo(() => {
     const strRecommendCode = params.get("recommendCode");
-    if (strRecommendCode) setCodeList([Number(strRecommendCode)]);
+    return strRecommendCode ? [Number(strRecommendCode)] : undefined;
   }, [params]);
 
   return (

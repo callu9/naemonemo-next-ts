@@ -1,6 +1,6 @@
 "use client";
 
-import { HTMLAttributes } from "react";
+import type { ComponentType, SVGProps } from "react";
 import IconAdd from "../assets/icon/add.svg";
 import IconConfirm from "../assets/icon/check_circle.svg";
 import Unchecked from "../assets/icon/check_false.svg";
@@ -22,7 +22,7 @@ import IconInvisible from "../assets/icon/visibility_off.svg";
 /**
  * 아이콘명에 따른 아이콘 컴포넌트 및 회전 각도 지정
  */
-function IconObj(iconNm: string): { component?: any; rotate?: number } {
+function IconObj(iconNm: string): { component?: ComponentType<SVGProps<SVGSVGElement>>; rotate?: number } {
   switch (iconNm) {
     case "chevronLess":
       return { component: IconChevron, rotate: 0 };
@@ -69,7 +69,7 @@ function IconObj(iconNm: string): { component?: any; rotate?: number } {
   }
 }
 
-export interface IconProps extends HTMLAttributes<HTMLElement> {
+export interface IconProps extends SVGProps<SVGSVGElement> {
   /**
    * 아이콘 명을 지정합니다.
    */
@@ -108,6 +108,8 @@ export const Icon = ({
 }: IconProps) => {
   const fillColor = iconColor || iconColorHex || "primary";
   const IconComponent = IconObj(iconNm).component;
+  if (!IconComponent) return null;
+
   return (
     <IconComponent
       {...props}

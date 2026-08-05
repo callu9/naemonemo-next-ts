@@ -1,10 +1,11 @@
 "use client";
 
-import { getProductList, Product } from "@/app/api/products/route";
 import { Container } from "@/atom/Container";
 import Loader from "@/components/common/Loader";
 import ProductItem from "@/components/products/ProductItem";
-import { useEffect, useRef, useState } from "react";
+import { getProducts } from "@/lib/client-api";
+import type { Product } from "@/lib/catalog";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "./products.scss";
 
 interface RecommendedResultProps {
@@ -12,49 +13,59 @@ interface RecommendedResultProps {
   offset: number;
   next?: number;
 }
+
+const initialResult: RecommendedResultProps = { productList: [], offset: 0, next: 0 };
+
 export default function RecommendList({ codeList }: { codeList?: number[] }) {
   const targetRef = useRef<HTMLDivElement>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [result, setResult] = useState<RecommendedResultProps>({
-    productList: [],
-    offset: 0,
-    next: 0,
-  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState<RecommendedResultProps>(initialResult);
 
   useEffect(() => {
-    if (codeList) setIsLoading(true);
+    if (!codeList) return;
+
+    let active = true;
+    void getProducts(codeList, 0).then((nextResult) => {
+      if (active) setResult(nextResult);
+    });
+
+    return () => {
+      active = false;
+    };
   }, [codeList]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!isLoading && entry.isIntersecting) setIsLoading(true);
-        });
-      },
-      { threshold: 1 }
-    );
-    if (targetRef.current) observer.observe(targetRef.current as Element);
-  }, [targetRef.current]);
+  const loadNextPage = useCallback(async () => {
+    if (!codeList || isLoading || result.next === undefined) return;
 
-  useEffect(() => {
-    if (isLoading) getList();
-  }, [isLoading]);
-
-  async function getList() {
-    if (!codeList) return;
-    const { data, offset, next } = await getProductList(codeList, result.offset);
-    setTimeout(() => {
-      const originList = result.productList;
-      setResult({ productList: [...originList, ...data], offset, next });
+    setIsLoading(true);
+    try {
+      const nextResult = await getProducts(codeList, result.offset);
+      setResult((current) => ({
+        ...nextResult,
+        productList: [...current.productList, ...nextResult.data],
+      }));
+    } finally {
       setIsLoading(false);
-    }, 300);
-  }
+    }
+  }, [codeList, isLoading, result.next, result.offset]);
+
+  useEffect(() => {
+    const target = targetRef.current;
+    if (!target || result.next === undefined) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) void loadNextPage();
+    });
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [loadNextPage, result.next]);
+
   return (
     <>
       <Container className="recommend-product-list">
-        {result.productList.map((prod: Product) => (
-          <ProductItem key={prod.productNo} product={prod} />
+        {result.productList.map((product) => (
+          <ProductItem key={product.productNo} product={product} />
         ))}
       </Container>
       {result.next !== undefined && (

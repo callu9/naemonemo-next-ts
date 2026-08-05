@@ -1,4 +1,4 @@
-import { Gate } from "@/app/api/gates/route";
+import type { Gate } from "@/lib/catalog";
 import { Container } from "@/atom/Container";
 import { Icon } from "@/atom/Icon";
 import ImageBox from "@/atom/ImageBox";
