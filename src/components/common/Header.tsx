@@ -3,7 +3,7 @@
 import { Container } from "@/atom/Container";
 import { Icon } from "@/atom/Icon";
 import { Text } from "@/atom/Text";
-import useCartStore, { cartStoreType } from "@/store/cart";
+import useCartStore from "@/store/cart";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import IconBag from "../../assets/icon/ic-bag.svg";
@@ -69,7 +69,7 @@ export function CartHeader() {
   );
 }
 export function IconCart() {
-  const { itemCount } = useCartStore() as cartStoreType;
+  const itemCount = useCartStore((state) => state.cartList.length);
   return (
     <Link href="/cart">
       <div className="icon-wrapper">

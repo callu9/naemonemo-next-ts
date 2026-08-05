@@ -16,7 +16,7 @@ export default function Card({
   return (
     <Container className="feed-card" gap={12}>
       <Container className="card" surface="secondary" radius={4}>
-        {imageUrl && <ImageBox imageUrl={imageUrl} alt="카드 이미지" width="100%" height="100%" />}
+        {imageUrl && <ImageBox imageUrl={imageUrl} alt="카드 이미지" width="100%" height="100%" sizes="335px" />}
         <Container className="card-info" gap={8}>
           <Text usage="title">{feedTitle}</Text>
           <Text>{feedContents}</Text>
@@ -24,7 +24,7 @@ export default function Card({
         {relatedProducts && (
           <Container className="product-list">
             {relatedProducts.map((product) => (
-              <ProductListItem key={product.productNo} product={product} />
+              <ProductListItem key={product.productNo} product={product} recommendCode={recommendCode} />
             ))}
           </Container>
         )}

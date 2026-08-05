@@ -2,15 +2,15 @@
 
 import { Container } from "@/atom/Container";
 import { CartHeader } from "@/components/common/Header";
-import useCartStore, { cartStoreType } from "@/store/cart";
+import useCartStore from "@/store/cart";
 import CartList from "@/template/cart/CartList";
 import PixidBottom from "@/template/cart/PixidBottom";
 import RecommendArea from "@/template/cart/RecommendArea";
 import "./cart.scss";
 
 export default function Cart() {
-  const { itemCount, cartList } = useCartStore() as cartStoreType;
-  const codeList = itemCount > 0 ? [...new Set(cartList.map((item) => item.recommendCode))] : [0];
+  const cartList = useCartStore((state) => state.cartList);
+  const codeList = cartList.length > 0 ? [...new Set(cartList.map((item) => item.recommendCode))] : [0];
 
   return (
     <>
