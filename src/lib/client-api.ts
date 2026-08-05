@@ -13,6 +13,10 @@ export type RecommendedProducts = {
   next?: number;
 };
 
+export function getRecommendationKey(codeList?: number[]) {
+  return codeList?.join(",");
+}
+
 export function toRecommendedProducts({ data, offset, next }: ProductPage): RecommendedProducts {
   return { productList: data, offset, next };
 }
