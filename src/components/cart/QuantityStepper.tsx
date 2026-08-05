@@ -1,8 +1,7 @@
 "use client";
 
-export function clampQuantity(value: number, min: number, max: number) {
-  return Math.min(max, Math.max(min, value));
-}
+import styles from "./QuantityStepper.module.css";
+import { clampQuantity } from "./quantity";
 
 export default function QuantityStepper({
   value,
@@ -16,7 +15,7 @@ export default function QuantityStepper({
   onChange: (value: number) => void;
 }) {
   return (
-    <div className="quantity-stepper" role="group" aria-label="상품 수량">
+    <div className={styles.stepper} role="group" aria-label="상품 수량">
       <button type="button" aria-label="수량 줄이기" onClick={() => onChange(clampQuantity(value - 1, min, max))} disabled={value <= min}>
         −
       </button>

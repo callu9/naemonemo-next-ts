@@ -8,7 +8,15 @@ import { Button } from "@/components/common/Button";
 import { formatNumber } from "@/lib/format";
 import { useMemo, useState } from "react";
 
-export default function PixidBottom({ cartList }: { cartList: CartItem[] }) {
+export default function PixidBottom({
+  cartList,
+  className,
+  dimmedClassName,
+}: {
+  cartList: CartItem[];
+  className: string;
+  dimmedClassName: string;
+}) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const priceDetail = useMemo(
     () =>
@@ -25,7 +33,7 @@ export default function PixidBottom({ cartList }: { cartList: CartItem[] }) {
   );
 
   return (
-    <div className={`pixid-bottom ${isOpen ? "dimmed" : ""}`}>
+    <div className={`${className} ${isOpen ? `${dimmedClassName} pixid-bottom--dimmed` : ""}`}>
       <Container className="cart-pixid-bottom" justify="stretch" align="lower">
         {isOpen && (
           <Container className="price-detail" justify="stretch" gap={10} surface="primary">

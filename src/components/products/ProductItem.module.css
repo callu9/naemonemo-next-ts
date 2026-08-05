@@ -1,0 +1,2 @@
+.coupon { display: flex; align-items: center; justify-content: center; width: 40px; height: 28px; color: var(--gray-0); font-family: "Pretendard400"; font-size: 13px; line-height: 130%; background: var(--gray-900); }
+@media (width < 800px) { .coupon { font-size: 12px; } }

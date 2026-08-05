@@ -5,6 +5,7 @@ import ImageBox from "@/atom/ImageBox";
 import { Text } from "@/atom/Text";
 import Link from "next/link";
 import ProductListItem from "./ProductListItem";
+import styles from "./FeedItem.module.css";
 
 export default function Card({
   feedTitle,
@@ -31,7 +32,7 @@ export default function Card({
       </Container>
       <Link
         href={`/products?recommendCode=${recommendCode}`}
-        className="display-flex text-semibold button-medium button-invert"
+        className={styles.recommendLink}
       >
         {relatedProducts.length ? "" : "모든 "}추천상품 보러가기
       </Link>

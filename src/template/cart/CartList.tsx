@@ -50,9 +50,9 @@ export default function CartList({ cartList }: { cartList: Item[] }) {
           </button>
           <Text>전체 선택 ({selected.length}/{cartList.length})</Text>
         </Container>
-        <button className="delete-cart-item button-small" onClick={onDeleteSelected}>
+        <Button className="delete-cart-item" size="small" onClick={onDeleteSelected}>
           선택 삭제
-        </button>
+        </Button>
       </Container>
       {cartList.map((item) => (
         <CartItem

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { clampQuantity } from "../src/components/cart/QuantityStepper";
+import { clampQuantity } from "../src/components/cart/quantity";
 
 test("clampQuantity keeps cart quantity within its allowed range", () => {
   assert.equal(clampQuantity(0, 1, 999), 1);

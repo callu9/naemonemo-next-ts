@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes } from "react";
+import styles from "./Button.module.css";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -30,7 +31,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
-      className={`${className} button-${size} button-${property} radius-${radius} display-flex`}
+      className={`${styles.button} ${styles[size]} ${styles[property]} ${styles[`radius${radius}`]} ${className}`}
       type={type}
       {...props}
     >

@@ -1,0 +1,22 @@
+.cart { position: relative; min-height: calc(100vh - 52px); }
+.cart > :global(.cart-empty) { height: 200px; align-items: center; }
+.cart > :global(.cart-list) { padding: 0 20px; }
+.cart :global(button.icon-wrapper) { display: flex; align-items: center; }
+.cart :global(button.icon-wrapper):disabled { cursor: not-allowed; background-color: transparent; }
+.cart :global(.cart-select-all) { height: 64px; }
+.cart :global(.delete-cart-item) { height: 28px; padding: 6px 10px; background-color: var(--gray-200); }
+.cart :global(.cart-item) { border-top: 1px solid var(--gray-200); }
+.cart :global(.item-name) { height: 44px; }
+.cart :global(.item-name) > p { flex-grow: 1; width: 286px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cart :global(.item-detail) > :global(.img-wrapper) { width: 72px; }
+.cart :global(.item-btns) { padding-bottom: 12px; }
+.cart :global(.item-btns) > button { height: 28px; padding: 6px 10px; }
+.cart > :global(.recommend-area):not(:has(:global(.recommend-product-list))) { min-height: 300px; }
+.cart > :global(.recommend-area) > :global(.recommend-area-header) { padding: 20px 20px 10px; }
+.pixidBottom { position: fixed; bottom: 0; }
+.pixidBottom :global(.cart-pixid-bottom) { box-shadow: 0 0 20px var(--gray-700); }
+.pixidBottom :global(.price-detail), .pixidBottom :global(.price-btn) { width: 400px; }
+.pixidBottom :global(.price-detail) { padding: 12px 16px; }
+.pixidBottom :global(.price-btn) { padding: 8px 16px; }
+.dimmed { z-index: 5; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; background-color: rgb(0 0 0 / 30%); }
+:global(body):has(:global(.pixid-bottom--dimmed)) { overflow: hidden; }

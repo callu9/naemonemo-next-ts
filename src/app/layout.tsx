@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "../styles/global.scss";
+import "../styles/global.css";
 import Favicon from "./favicon.ico";
 
 export const metadata: Metadata = {
