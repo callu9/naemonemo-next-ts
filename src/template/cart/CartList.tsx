@@ -6,12 +6,12 @@ import { Icon } from "@/atom/Icon";
 import { Text } from "@/atom/Text";
 import CartItem from "@/components/cart/CartItem";
 import { Button } from "@/components/common/Button";
-import useCartStore, { cartStoreType } from "@/store/cart";
+import useCartStore from "@/store/cart";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function CartList({ cartList }: { cartList: Item[] }) {
-  const { removeFromCart } = useCartStore() as cartStoreType;
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
   const [selected, setSelected] = useState<number[]>([]);
 
   function onSelectAll() {
@@ -24,7 +24,8 @@ export default function CartList({ cartList }: { cartList: Item[] }) {
     else setSelected([...selected.slice(0, idx), ...selected.slice(idx + 1)]);
   }
   async function onDeleteSelected() {
-    removeFromCart(selected);
+    await removeFromCart(selected);
+    setSelected([]);
   }
 
   return cartList.length === 0 ? (
@@ -47,7 +48,7 @@ export default function CartList({ cartList }: { cartList: Item[] }) {
               iconSize={24}
             />
           </button>
-          <Text>전체 선택 (0/{cartList.length})</Text>
+          <Text>전체 선택 ({selected.length}/{cartList.length})</Text>
         </Container>
         <button className="delete-cart-item button-small" onClick={onDeleteSelected}>
           선택 삭제

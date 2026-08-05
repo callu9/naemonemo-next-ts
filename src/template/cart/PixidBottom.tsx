@@ -5,6 +5,7 @@ import { Container } from "@/atom/Container";
 import { Icon } from "@/atom/Icon";
 import { Text } from "@/atom/Text";
 import { Button } from "@/components/common/Button";
+import { formatNumber } from "@/lib/format";
 import { useMemo, useState } from "react";
 
 export default function PixidBottom({ cartList }: { cartList: CartItem[] }) {
@@ -23,8 +24,6 @@ export default function PixidBottom({ cartList }: { cartList: CartItem[] }) {
     [cartList],
   );
 
-  const formatNumberStr = (price: number) => new Intl.NumberFormat("ko-KR").format(price);
-
   return (
     <div className={`pixid-bottom ${isOpen ? "dimmed" : ""}`}>
       <Container className="cart-pixid-bottom" justify="stretch" align="lower">
@@ -38,15 +37,15 @@ export default function PixidBottom({ cartList }: { cartList: CartItem[] }) {
             </Container>
             <Container display="flex" justify="sides">
               <Text>주문상품 수량</Text>
-              <Text weight="semibold">{formatNumberStr(priceDetail.count)}개</Text>
+              <Text weight="semibold">{formatNumber(priceDetail.count)}개</Text>
             </Container>
             <Container display="flex" justify="sides">
               <Text>총 주문 금액</Text>
-              <Text weight="semibold">{formatNumberStr(priceDetail.totalPrice)}</Text>
+              <Text weight="semibold">{formatNumber(priceDetail.totalPrice)}</Text>
             </Container>
             <Container display="flex" justify="sides">
               <Text>총 할인 금액</Text>
-              <Text weight="semibold">{formatNumberStr(priceDetail.totalDiscount)}</Text>
+              <Text weight="semibold">{formatNumber(priceDetail.totalDiscount)}</Text>
             </Container>
             <Container display="flex" justify="sides">
               <Text>배송비</Text>
@@ -57,7 +56,7 @@ export default function PixidBottom({ cartList }: { cartList: CartItem[] }) {
         <Container className="price-btn" display="flex" justify="sides" surface="primary">
           <button className="icon-wrapper display-flex gap-2" onClick={() => setIsOpen(!isOpen)}>
             <Text usage="title">
-              총 {formatNumberStr(priceDetail.totalPrice - priceDetail.totalDiscount)}원
+              총 {formatNumber(priceDetail.totalPrice - priceDetail.totalDiscount)}원
             </Text>
             <Icon iconNm={isOpen ? "chevronLess" : "chevronMore"} iconSize={32} />
           </button>

@@ -3,7 +3,9 @@ import { Container } from "@/atom/Container";
 import { Icon } from "@/atom/Icon";
 import { Text } from "@/atom/Text";
 import { Button } from "../common/Button";
-import useCartStore, { cartStoreType } from "@/store/cart";
+import { formatWon } from "@/lib/format";
+import useCartStore from "@/store/cart";
+import Image from "next/image";
 
 export default function CartItem({
   item,
@@ -14,9 +16,9 @@ export default function CartItem({
   checked: boolean;
   onSelect: (productNo: number) => void;
 }) {
-  const { updateCartItemCount, removeFromCart } = useCartStore() as cartStoreType;
-  const strPriceWon = (price: number) =>
-    `${new Intl.NumberFormat("ko-KR").format(item.availableCoupon ? price * 0.9 : price)}원`;
+  const updateCartItemCount = useCartStore((state) => state.updateCartItemCount);
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const strPriceWon = (price: number) => formatWon(item.availableCoupon ? price * 0.9 : price);
   return (
     <Container className="cart-item" gap={4}>
       <Container className="item-info">
@@ -35,7 +37,7 @@ export default function CartItem({
         </Container>
         <Container className="item-detail" display="flex" justify="left" gap={12}>
           <div className="img-wrapper">
-            {item.imageUrl && <img src={item.imageUrl} alt="장바구니 상품 이미지" />}
+            {item.imageUrl && <Image src={item.imageUrl} alt="장바구니 상품 이미지" fill sizes="72px" />}
           </div>
           <Container justify="left" align="upper">
             <Text>{strPriceWon(item.price)}</Text>

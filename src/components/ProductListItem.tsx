@@ -4,21 +4,11 @@ import type { Product, RelatedProduct } from "@/lib/catalog";
 import { Container } from "@/atom/Container";
 import ImageBox from "@/atom/ImageBox";
 import { Text } from "@/atom/Text";
-import useCartStore, { cartStoreType } from "@/store/cart";
-import ToggleIconEmpty from "../assets/icon/toggledIconButton_false.svg";
-import ToggleIcon from "../assets/icon/toggledIconButton_true.svg";
+import CartToggleButton from "./cart/CartToggleButton";
+import { formatWon } from "@/lib/format";
 
-export default function ProductListItem({ product }: { product: RelatedProduct }) {
-  const { cartList, addToCart, removeFromCart } = useCartStore() as cartStoreType;
-  const addable = cartList.findIndex((item) => item.productNo === product.productNo) < 0;
-
-  function addItemToCart() {
-    addToCart(product as Product);
-  }
-  function deleteItemfromCart() {
-    removeFromCart([product.productNo]);
-  }
-
+export default function ProductListItem({ product, recommendCode }: { product: RelatedProduct; recommendCode: number }) {
+  const cartProduct: Product = { ...product, recommendCode };
   return (
     <div className="product-list-item">
       <Container className="product-wrapper" display="flex" justify="sides" gap={16}>
@@ -42,15 +32,9 @@ export default function ProductListItem({ product }: { product: RelatedProduct }
           <Text className="product-name" weight="bold">
             {product.productName}
           </Text>
-          <Text>{new Intl.NumberFormat("ko-KR").format(product.price)}원</Text>
+          <Text>{formatWon(product.price)}</Text>
         </Container>
-        <button className="toggled-icon-button">
-          {addable ? (
-            <ToggleIconEmpty width="24" height="24" onClick={addItemToCart} />
-          ) : (
-            <ToggleIcon width="24" height="24" onClick={deleteItemfromCart} />
-          )}
-        </button>
+        <CartToggleButton product={cartProduct} className="toggled-icon-button" />
       </Container>
     </div>
   );

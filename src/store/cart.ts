@@ -4,32 +4,26 @@ import { addCartItem, deleteCartItems } from "@/lib/client-api";
 import type { Product } from "@/lib/catalog";
 import { create } from "zustand";
 
-type cartState = {
-  itemCount: number;
+export type CartStore = {
   cartList: CartItem[];
-};
-export type cartStoreType = {
-  itemCount: number;
-  cartList: CartItem[];
-  addToCart: (product: Product) => void;
-  updateCartItemCount: (product: Product, count: number) => void;
-  removeFromCart: (productNos: number[]) => void;
+  addToCart: (product: Product) => Promise<void>;
+  updateCartItemCount: (product: Product, count: number) => Promise<void>;
+  removeFromCart: (productNos: number[]) => Promise<void>;
 };
 
-const useCartStore = create((set) => ({
-  itemCount: cartList.length,
+const useCartStore = create<CartStore>((set) => ({
   cartList: cartList,
   addToCart: async (product: Product) => {
     const result = await addCartItem(product, 1);
-    if (result) set(() => ({ itemCount: result.length, cartList: result }));
+    if (result) set({ cartList: result });
   },
   updateCartItemCount: async (product: Product, count: number) => {
     const result = await addCartItem(product, count);
-    if (result) set((state: cartState) => ({ ...state, cartList: result }));
+    if (result) set({ cartList: result });
   },
   removeFromCart: async (productNos: number[]) => {
     const result = await deleteCartItems(productNos);
-    if (result) set(() => ({ itemCount: result.length, cartList: result }));
+    if (result) set({ cartList: result });
   },
 }));
 export default useCartStore;
