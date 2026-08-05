@@ -1,0 +1,9 @@
+.button { display: flex; align-items: center; justify-content: center; }
+.large { height: 54px; padding: 16px 32px; font-family: "Pretendard400"; font-size: 18px; line-height: 130%; }
+.medium { height: 48px; padding: 14px 32px; font-family: "Pretendard400"; font-size: 15px; line-height: 130%; }
+.small { height: 40px; padding: 7px 24px; font-family: "Pretendard400"; font-size: 14px; line-height: 130%; }
+.radius0 { border-radius: 0; }.radius4 { border-radius: 4px; }.radius8 { border-radius: 8px; }
+.outlined { color: var(--gray-700); background: var(--gray-0); border: 1px solid var(--gray-300); }
+.warning { color: var(--gray-0); background: var(--red-500); }.negative { color: var(--red-500); background: var(--red-50); }.positive { color: var(--blue-500); background: var(--blue-50); }.info { color: var(--navy-500); background: var(--navy-50); }.invert { color: var(--gray-0); background: var(--gray-900); }.tertiary { color: var(--gray-700); background: var(--gray-100); border: 1px solid var(--gray-500); }
+.warning svg { fill: var(--gray-0); }.negative svg { fill: var(--red-500); }.positive svg { fill: var(--blue-500); }.info svg { fill: var(--navy-500); }.invert svg { fill: var(--gray-0); }.tertiary svg { fill: var(--gray-700); }
+.button:disabled { color: var(--gray-500); cursor: not-allowed; background: var(--gray-200); }.button:disabled svg { fill: var(--gray-500); }

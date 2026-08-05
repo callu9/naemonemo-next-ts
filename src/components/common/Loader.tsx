@@ -1,12 +1,14 @@
+import styles from "./Loader.module.css";
+
 export default function Loader() {
   return (
-    <div className="loader dimmed">
-      <div className="loaders-wrapper display-flex">
-        <div className="loader-item" />
-        <div className="loader-item" />
-        <div className="loader-item" />
-        <div className="loader-item" />
-        <div className="loader-item" />
+    <div className={styles.loader}>
+      <div className={styles.loadersWrapper}>
+        <div className={styles.loaderItem} />
+        <div className={styles.loaderItem} />
+        <div className={styles.loaderItem} />
+        <div className={styles.loaderItem} />
+        <div className={styles.loaderItem} />
       </div>
     </div>
   );

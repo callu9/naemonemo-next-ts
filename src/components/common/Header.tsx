@@ -9,10 +9,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import IconBag from "../../assets/icon/ic-bag.svg";
 import Logo from "../../assets/icon/logo.svg";
+import styles from "./Header.module.css";
 
 export function MainHeader() {
   return (
-    <ul className="header-nav display-flex justify-sides">
+    <ul className={styles.headerNav}>
       <li>
         <Link href="/">
           <Container display="flex" justify="left" gap={8}>
@@ -32,7 +33,7 @@ export function MainHeader() {
 export function ProductsHeader() {
   const router = useRouter();
   return (
-    <ul className="header-nav display-flex justify-sides">
+    <ul className={styles.headerNav}>
       <li>
         <IconButton className="icon-wrapper" label="이전 페이지" onClick={() => router.back()}>
           <Icon iconNm="chevronLeft" iconSize={32} />
@@ -52,7 +53,7 @@ export function ProductsHeader() {
 export function CartHeader() {
   const router = useRouter();
   return (
-    <ul className="header-nav display-flex justify-sides">
+    <ul className={styles.headerNav}>
       <li>
         <IconButton className="icon-wrapper" label="이전 페이지" onClick={() => router.back()}>
           <Icon iconNm="chevronLeft" iconSize={32} />
@@ -73,9 +74,9 @@ export function IconCart() {
   const itemCount = useCartStore((state) => state.cartList.length);
   return (
     <Link href="/cart">
-      <div className="icon-wrapper">
+      <div className={styles.iconWrapper}>
         <IconBag width="24" height="24" />
-        <div className="cart-item-count display-flex surface-warning radius-circle text-invert lable-small">
+        <div className={styles.cartItemCount}>
           {itemCount}
         </div>
       </div>

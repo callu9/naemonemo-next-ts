@@ -6,6 +6,7 @@ import { Text } from "@/atom/Text";
 import CartToggleButton from "@/components/cart/CartToggleButton";
 import { formatWon } from "@/lib/format";
 import Image from "next/image";
+import styles from "./ProductItem.module.css";
 
 export default function ProductItem({ product }: { product: Product }) {
   return (
@@ -18,7 +19,7 @@ export default function ProductItem({ product }: { product: Product }) {
       <div className="img-wrapper">
         {product.imageUrl && <Image src={product.imageUrl} alt="상품 이미지" fill sizes="200px" />}
         {product.availableCoupon && (
-          <div className="coupon-available display-flex body-extra-small button-invert">쿠폰</div>
+          <div className={`coupon-available ${styles.coupon}`}>쿠폰</div>
         )}
       </div>
       <Container className="product-info-area" display="flex" justify="sides" align="upper" gap={8}>
