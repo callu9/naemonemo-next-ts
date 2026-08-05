@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "test": "node --import tsx --test tests/*.test.ts"
+    "test": "node --import tsx --test tests/*.test.ts",
+    "storybook": "storybook dev -p 6006",
+    "storybook:build": "storybook build"
   },
   "engines": {
     "node": ">=20.9.0"
@@ -20,12 +22,15 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
+    "@storybook/addon-docs": "^10.5.6",
+    "@storybook/nextjs-vite": "^10.5.6",
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^26.1.2",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.3.0",
+    "storybook": "^10.5.6",
     "tsx": "^4.23.5",
     "typescript": "^6.0.3"
   }
