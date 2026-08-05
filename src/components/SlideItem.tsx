@@ -1,6 +1,7 @@
 import type { Banner } from "@/lib/catalog";
 import { Container } from "@/atom/Container";
 import { Text } from "@/atom/Text";
+import Image from "next/image";
 
 export default function SlideItem({
   bannerLink,
@@ -8,7 +9,8 @@ export default function SlideItem({
   bannerTitle,
   bannerContent,
   imageUrl,
-}: Banner) {
+  preload,
+}: Banner & { preload: boolean }) {
   const renderParagraph = (keyNm: string, paragraph: string) => {
     const splitted = paragraph.split(/(\n)/);
     return splitted.map((line: string, idx: number) => {
@@ -24,7 +26,7 @@ export default function SlideItem({
         surface="tertiary"
         id={`banner-${bannerNo}`}
       >
-        <img src={imageUrl} alt="슬라이드 배너 이미지" />
+        <Image src={imageUrl} alt="슬라이드 배너 이미지" fill sizes="400px" preload={preload} />
         <Container gap={12} color="invert">
           <Text usage="headline">{renderParagraph("title", bannerTitle)}</Text>
           <Text>{renderParagraph("content", bannerContent)}</Text>

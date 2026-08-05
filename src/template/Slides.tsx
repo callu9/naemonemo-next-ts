@@ -30,8 +30,8 @@ export default function Slides({ bannerList }: { bannerList: BannerList }) {
     <div className="slide-list">
       <Icon iconNm="chevronLeft" iconColor="invert" iconSize={48} onClick={() => onClickChevron(-1)} />
       <Container className="slide-wrapper" display="flex" justify="left" id="slide-wrapper">
-        {bannerList.map((banner) => (
-          <SlideItem key={banner.bannerNo} {...banner} />
+        {bannerList.map((banner, index) => (
+          <SlideItem key={banner.bannerNo} {...banner} preload={index === 0} />
         ))}
       </Container>
       <Container className="progress-bar" display="flex" justify="stretch">
