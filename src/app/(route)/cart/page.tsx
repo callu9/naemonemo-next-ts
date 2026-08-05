@@ -6,7 +6,7 @@ import useCartStore from "@/store/cart";
 import CartList from "@/template/cart/CartList";
 import PixidBottom from "@/template/cart/PixidBottom";
 import RecommendArea from "@/template/cart/RecommendArea";
-import "./cart.scss";
+import styles from "./cart.module.css";
 
 export default function Cart() {
   const cartList = useCartStore((state) => state.cartList);
@@ -16,7 +16,7 @@ export default function Cart() {
     <>
       <CartHeader />
       <Container
-        className="cart"
+        className={styles.cart}
         surface="tertiary"
         display="flex"
         direction="column"
@@ -26,7 +26,7 @@ export default function Cart() {
       >
         <CartList cartList={cartList} />
         <RecommendArea codeList={codeList} />
-        <PixidBottom cartList={cartList} />
+        <PixidBottom cartList={cartList} className={styles.pixidBottom} dimmedClassName={styles.dimmed} />
       </Container>
     </>
   );
