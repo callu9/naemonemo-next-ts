@@ -1,6 +1,6 @@
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 
-interface ContainerProps extends HTMLAttributes<HTMLElement> {
+interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * 정렬 방식을 설정합니다 (vertical or horizontal)
    */
@@ -57,27 +57,34 @@ interface ContainerProps extends HTMLAttributes<HTMLElement> {
 /**
  * 배경색 및 테두리 색상을 쉽게 지정하고, 자식 요소간 정렬을 돕습니다.
  */
-export const Container = ({ display = "grid", className, color, ...props }: ContainerProps) => {
-  const STYLE_KEYS = [
-    "display",
-    "direction",
-    "justify",
-    "align",
-    "gap",
-    "radius",
-    "surface",
-    "border",
-    "text",
-  ];
-  const entries = Object.entries({ ...{ ...props, display, text: color } });
-  const styles = entries
-    .map(([keyNm, value]: string[]) =>
-      STYLE_KEYS.includes(keyNm) ? value && `${keyNm}-${value}` : undefined
-    )
-    .filter((el: string | undefined) => el);
+export const Container = ({
+  display = "grid",
+  direction,
+  justify,
+  align,
+  gap,
+  radius,
+  surface,
+  color,
+  borderColor,
+  className = "",
+  children,
+  ...props
+}: ContainerProps) => {
+  const styles = [
+    `display-${display}`,
+    direction && `direction-${direction}`,
+    justify && `justify-${justify}`,
+    align && `align-${align}`,
+    gap !== undefined && `gap-${gap}`,
+    radius !== undefined && `radius-${radius}`,
+    surface && `surface-${surface}`,
+    color && `text-${color}`,
+    borderColor && `border-${borderColor}`,
+  ].filter(Boolean);
   return (
     <div {...props} className={`container ${className} ${styles.join(" ")}`}>
-      {props.children}
+      {children}
     </div>
   );
 };

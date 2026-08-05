@@ -3,6 +3,7 @@
 import { Container } from "@/atom/Container";
 import { Icon } from "@/atom/Icon";
 import { Text } from "@/atom/Text";
+import { IconButton } from "@/components/common/IconButton";
 import useCartStore from "@/store/cart";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -33,9 +34,9 @@ export function ProductsHeader() {
   return (
     <ul className="header-nav display-flex justify-sides">
       <li>
-        <button className="icon-wrapper" onClick={() => router.back()}>
+        <IconButton className="icon-wrapper" label="이전 페이지" onClick={() => router.back()}>
           <Icon iconNm="chevronLeft" iconSize={32} />
-        </button>
+        </IconButton>
       </li>
       <li>
         <Text fontStyle="large" weight="bold">
@@ -53,9 +54,9 @@ export function CartHeader() {
   return (
     <ul className="header-nav display-flex justify-sides">
       <li>
-        <button className="icon-wrapper" onClick={() => router.back()}>
+        <IconButton className="icon-wrapper" label="이전 페이지" onClick={() => router.back()}>
           <Icon iconNm="chevronLeft" iconSize={32} />
-        </button>
+        </IconButton>
       </li>
       <li>
         <Text fontStyle="large" weight="bold">

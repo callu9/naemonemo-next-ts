@@ -3,6 +3,7 @@ import { Container } from "@/atom/Container";
 import { Icon } from "@/atom/Icon";
 import { Text } from "@/atom/Text";
 import { Button } from "../common/Button";
+import QuantityStepper from "./QuantityStepper";
 import { formatWon } from "@/lib/format";
 import useCartStore from "@/store/cart";
 import Image from "next/image";
@@ -54,23 +55,7 @@ export default function CartItem({
               쿠폰 적용
             </Button>
           )}
-          <Container display="flex" align="center" gap={6} className="adjust-count button-outlined">
-            <button
-              className="icon-wrapper"
-              onClick={() => item.count > 1 && updateCartItemCount(item, item.count - 1)}
-              disabled={item.count <= 1}
-            >
-              <Icon iconNm="remove" iconSize={18} />
-            </button>
-            <Text fontStyle="small">{item.count}</Text>
-            <button
-              className="icon-wrapper"
-              onClick={() => item.count < 999 && updateCartItemCount(item, item.count + 1)}
-              disabled={item.count >= 999}
-            >
-              <Icon iconNm="add" iconSize={18} />
-            </button>
-          </Container>
+          <QuantityStepper value={item.count} onChange={(count) => updateCartItemCount(item, count)} />
         </Container>
       </Container>
     </Container>
