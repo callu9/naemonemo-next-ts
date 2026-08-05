@@ -1,5 +1,6 @@
 import { Container } from "@/atom/Container";
 import { Text } from "@/atom/Text";
+import { getRecommendationKey } from "@/lib/client-api";
 import RecommendList from "../products/RecommendList";
 
 export default function RecommendArea({ codeList }: { codeList: number[] }) {
@@ -11,7 +12,7 @@ export default function RecommendArea({ codeList }: { codeList: number[] }) {
         </Text>
       </div>
       <Container surface="primary" align="upper" className="recommend-product-area">
-        {codeList.length > 0 && <RecommendList codeList={codeList} />}
+        {codeList.length > 0 && <RecommendList key={getRecommendationKey(codeList)} codeList={codeList} />}
       </Container>
     </Container>
   );

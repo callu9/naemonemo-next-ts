@@ -3,51 +3,62 @@
 import { Container } from "@/atom/Container";
 import Loader from "@/components/common/Loader";
 import ProductItem from "@/components/products/ProductItem";
-import { getProducts, toRecommendedProducts } from "@/lib/client-api";
+import { getProducts, getRecommendationKey, toRecommendedProducts } from "@/lib/client-api";
 import type { Product } from "@/lib/catalog";
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./products.scss";
 
-interface RecommendedResultProps {
+export interface RecommendedResultProps {
   productList: Product[];
   offset: number;
   next?: number;
 }
 
-const initialResult: RecommendedResultProps = { productList: [], offset: 0 };
+const emptyResult: RecommendedResultProps = { productList: [], offset: 0 };
 
-export default function RecommendList({ codeList }: { codeList?: number[] }) {
+export default function RecommendList({
+  codeList,
+  initialResult,
+}: {
+  codeList?: number[];
+  initialResult?: RecommendedResultProps;
+}) {
   const targetRef = useRef<HTMLDivElement>(null);
+  const loadingRef = useRef(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [result, setResult] = useState<RecommendedResultProps>(initialResult);
+  const [result, setResult] = useState<RecommendedResultProps>(initialResult ?? emptyResult);
+  const recommendationKey = getRecommendationKey(codeList);
 
   useEffect(() => {
-    if (!codeList) return;
+    if (!recommendationKey || initialResult) return;
 
     let active = true;
-    void getProducts(codeList, 0).then((page) => {
+    const recommendationCodes = recommendationKey.split(",").map(Number);
+    void getProducts(recommendationCodes, 0).then((page) => {
       if (active) setResult(toRecommendedProducts(page));
     });
 
     return () => {
       active = false;
     };
-  }, [codeList]);
+  }, [initialResult, recommendationKey]);
 
   const loadNextPage = useCallback(async () => {
-    if (!codeList || isLoading || result.next === undefined) return;
+    if (!recommendationKey || loadingRef.current || result.next === undefined) return;
 
+    loadingRef.current = true;
     setIsLoading(true);
     try {
-      const nextResult = await getProducts(codeList, result.offset);
+      const nextResult = await getProducts(recommendationKey.split(",").map(Number), result.offset);
       setResult((current) => ({
         ...nextResult,
         productList: [...current.productList, ...nextResult.data],
       }));
     } finally {
+      loadingRef.current = false;
       setIsLoading(false);
     }
-  }, [codeList, isLoading, result.next, result.offset]);
+  }, [recommendationKey, result.next, result.offset]);
 
   useEffect(() => {
     const target = targetRef.current;
