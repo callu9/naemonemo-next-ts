@@ -3,7 +3,7 @@
 import { Container } from "@/atom/Container";
 import Loader from "@/components/common/Loader";
 import ProductItem from "@/components/products/ProductItem";
-import { getProducts } from "@/lib/client-api";
+import { getProducts, toRecommendedProducts } from "@/lib/client-api";
 import type { Product } from "@/lib/catalog";
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./products.scss";
@@ -14,7 +14,7 @@ interface RecommendedResultProps {
   next?: number;
 }
 
-const initialResult: RecommendedResultProps = { productList: [], offset: 0, next: 0 };
+const initialResult: RecommendedResultProps = { productList: [], offset: 0 };
 
 export default function RecommendList({ codeList }: { codeList?: number[] }) {
   const targetRef = useRef<HTMLDivElement>(null);
@@ -25,8 +25,8 @@ export default function RecommendList({ codeList }: { codeList?: number[] }) {
     if (!codeList) return;
 
     let active = true;
-    void getProducts(codeList, 0).then((nextResult) => {
-      if (active) setResult(nextResult);
+    void getProducts(codeList, 0).then((page) => {
+      if (active) setResult(toRecommendedProducts(page));
     });
 
     return () => {

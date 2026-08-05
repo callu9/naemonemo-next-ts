@@ -23,7 +23,7 @@ function ProductsPage() {
   return (
     <>
       <ProductsHeader />
-      <RecommendList codeList={codeList} />
+      <RecommendList key={codeList?.join(",") ?? "all"} codeList={codeList} />
     </>
   );
 }

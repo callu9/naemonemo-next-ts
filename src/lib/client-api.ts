@@ -1,7 +1,23 @@
 import type { CartItem } from "./cart";
 import type { Product } from "./catalog";
 
-export async function getProducts(codeList: number[], offset: number) {
+export type ProductPage = {
+  data: Product[];
+  offset: number;
+  next?: number;
+};
+
+export type RecommendedProducts = {
+  productList: Product[];
+  offset: number;
+  next?: number;
+};
+
+export function toRecommendedProducts({ data, offset, next }: ProductPage): RecommendedProducts {
+  return { productList: data, offset, next };
+}
+
+export async function getProducts(codeList: number[], offset: number): Promise<ProductPage> {
   const params = new URLSearchParams();
   codeList.forEach((recommendCode) => params.append("recommendCode", String(recommendCode)));
   params.append("offset", String(offset));
