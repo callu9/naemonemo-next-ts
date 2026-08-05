@@ -1,4 +1,4 @@
-import { Feed } from "@/app/api/feeds/route";
+import type { Feed } from "@/lib/catalog";
 import { Container } from "@/atom/Container";
 import Card from "@/components/FeedItem";
 

@@ -1,5 +1,7 @@
-import { addCartItem, CartItem, deleteCartItems, cartList } from "@/app/api/cart/route";
-import { Product } from "@/app/api/products/route";
+import { cartList } from "@/lib/cart";
+import type { CartItem } from "@/lib/cart";
+import { addCartItem, deleteCartItems } from "@/lib/client-api";
+import type { Product } from "@/lib/catalog";
 import { create } from "zustand";
 
 type cartState = {

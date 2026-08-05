@@ -1,4 +1,4 @@
-import { Banner } from "@/app/api/banner/route";
+import type { Banner } from "@/lib/catalog";
 import { Container } from "@/atom/Container";
 import { Text } from "@/atom/Text";
 

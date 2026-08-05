@@ -1,6 +1,6 @@
 "use client";
 
-import { Product } from "@/app/api/products/route";
+import type { Product } from "@/lib/catalog";
 import IconBagEmpty from "@/assets/icon/toggledIconButton_false.svg";
 import IconBag from "@/assets/icon/toggledIconButton_true.svg";
 import { Container } from "@/atom/Container";

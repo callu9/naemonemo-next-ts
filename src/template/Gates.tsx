@@ -1,4 +1,4 @@
-import { Gate, GateList } from "@/app/api/gates/route";
+import type { Gate, GateList } from "@/lib/catalog";
 import { Container } from "@/atom/Container";
 import GateListItem from "@/components/GateItem";
 

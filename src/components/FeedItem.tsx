@@ -1,5 +1,5 @@
 "use client";
-import { Feed } from "@/app/api/feeds/route";
+import type { Feed } from "@/lib/catalog";
 import { Container } from "@/atom/Container";
 import ImageBox from "@/atom/ImageBox";
 import { Text } from "@/atom/Text";
@@ -24,7 +24,7 @@ export default function Card({
         {relatedProducts && (
           <Container className="product-list">
             {relatedProducts.map((product) => (
-              <ProductListItem key={product.productNo} product={product} onUpdate={() => {}} />
+              <ProductListItem key={product.productNo} product={product} />
             ))}
           </Container>
         )}

@@ -1,31 +1,27 @@
 "use client";
 
-import { CartItem } from "@/app/api/cart/route";
+import type { CartItem } from "@/lib/cart";
 import { Container } from "@/atom/Container";
 import { Icon } from "@/atom/Icon";
 import { Text } from "@/atom/Text";
 import { Button } from "@/components/common/Button";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 
 export default function PixidBottom({ cartList }: { cartList: CartItem[] }) {
-  const initialValue = { count: 0, totalPrice: 0, totalDiscount: 0, deliveryFee: 0 };
-  const [priceDetail, setPriceDetail] = useState<{
-    count: number;
-    totalPrice: number;
-    totalDiscount: number;
-    deliveryFee: number;
-  }>(initialValue);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  useEffect(() => {
-    const result = { ...initialValue };
-    cartList.forEach((item) => {
-      result.count += item.count;
-      result.totalPrice += item.price * item.count;
-      result.totalDiscount += item.availableCoupon ? 0.1 * item.price * item.count : 0;
-    });
-    setPriceDetail(result);
-  }, [cartList]);
+  const priceDetail = useMemo(
+    () =>
+      cartList.reduce(
+        (result, item) => ({
+          count: result.count + item.count,
+          totalPrice: result.totalPrice + item.price * item.count,
+          totalDiscount: result.totalDiscount + (item.availableCoupon ? 0.1 * item.price * item.count : 0),
+          deliveryFee: 0,
+        }),
+        { count: 0, totalPrice: 0, totalDiscount: 0, deliveryFee: 0 },
+      ),
+    [cartList],
+  );
 
   const formatNumberStr = (price: number) => new Intl.NumberFormat("ko-KR").format(price);
 

@@ -1,7 +1,6 @@
 "use client";
 
-import { RelatedProduct } from "@/app/api/feeds/route";
-import { Product } from "@/app/api/products/route";
+import type { Product, RelatedProduct } from "@/lib/catalog";
 import { Container } from "@/atom/Container";
 import ImageBox from "@/atom/ImageBox";
 import { Text } from "@/atom/Text";
