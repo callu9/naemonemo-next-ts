@@ -6,7 +6,7 @@ import ProductItem from "@/components/products/ProductItem";
 import { getProducts, getRecommendationKey, toRecommendedProducts } from "@/lib/client-api";
 import type { Product } from "@/lib/catalog";
 import { useCallback, useEffect, useRef, useState } from "react";
-import "./products.scss";
+import styles from "./RecommendList.module.css";
 
 export interface RecommendedResultProps {
   productList: Product[];
@@ -74,16 +74,16 @@ export default function RecommendList({
 
   return (
     <>
-      <Container className="recommend-product-list">
+      <Container className={`${styles.recommendProductList} recommend-product-list`}>
         {result.productList.map((product) => (
           <ProductItem key={product.productNo} product={product} />
         ))}
       </Container>
       {result.next !== undefined && (
-        <div id="infinite-scroll" className="scroll-footer" ref={targetRef}>
-          <div className="scroll-loader" />
-          <div className="scroll-loader" />
-          <div className="scroll-loader" />
+        <div id="infinite-scroll" className={styles.scrollFooter} ref={targetRef}>
+          <div className={styles.scrollLoader} />
+          <div className={styles.scrollLoader} />
+          <div className={styles.scrollLoader} />
         </div>
       )}
       {isLoading && <Loader />}

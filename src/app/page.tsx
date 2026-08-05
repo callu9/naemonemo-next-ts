@@ -4,7 +4,7 @@ import Feeds from "@/template/Feeds";
 import Gates from "@/template/Gates";
 import Slides from "@/template/Slides";
 import { getBanners, getFeeds, getGates } from "@/lib/catalog";
-import "./home.scss";
+import styles from "./home.module.css";
 
 export default function Home() {
   const slideList = getBanners();
@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <MainHeader />
-      <Container className="home" gap={48}>
+      <Container className={styles.home} gap={48}>
         <Slides bannerList={slideList} />
         <Gates gateList={gateList} />
         <Feeds feedList={feedList} />

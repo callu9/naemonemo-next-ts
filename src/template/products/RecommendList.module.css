@@ -1,0 +1,11 @@
+.recommendProductList { grid-template-columns: repeat(2, auto); }
+.recommendProductList > :global(.recommend-product-list-item) { align-self: flex-start; width: 200px; }
+.recommendProductList :global(.img-wrapper) { position: relative; width: inherit; aspect-ratio: 1; }
+.recommendProductList :global(.coupon-available) { position: absolute; bottom: 0; left: 0; width: 40px; height: 28px; }
+.recommendProductList :global(.product-info-area) { padding: 0 10px 24px; }
+.recommendProductList :global(.product-info) { align-items: stretch; }
+.recommendProductList :global(.product-name) { display: -webkit-box; max-height: 40px; overflow: hidden; word-break: break-all; text-overflow: ellipsis; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.scrollFooter { display: flex; justify-content: center; gap: 8px; padding: 16px 0 24px; }
+.scrollLoader { width: 16px; height: 16px; background-color: var(--gray-300); }
+.scrollLoader:first-child { background-color: var(--gray-200); }
+.scrollLoader:last-child { background-color: var(--gray-400); }
